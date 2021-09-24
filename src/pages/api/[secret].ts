@@ -1,6 +1,6 @@
-import asyncBusboy from "async-busboy";
-import { gql, GraphQLClient } from "graphql-request";
-import type { NextApiRequest, NextApiResponse } from "next";
+import busboy from 'busboy';
+import { gql, GraphQLClient } from 'graphql-request';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export interface IplexWebhookAccount {
   id: number;
@@ -111,45 +111,56 @@ export interface IplexWebhook {
   Metadata: IplexWebhookMetadata;
 }
 
-export default async function (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default function (req: NextApiRequest, res: NextApiResponse): void {
   const { secret } = req.query;
 
   if (req.method === "POST") {
-    const { fields } = await asyncBusboy(req);
-    if (fields.payload) {
-      const payload = JSON.parse(fields.payload) as IplexWebhook;
-      const regex = new RegExp(
-        /me\.sachaw\.agents\.anilist:\/\/(?<id>.*)\/[0-9]\//
-      );
-      const providerMediaId = regex.exec(payload.Metadata.guid);
+    const parser = new busboy({
+      headers: req.headers,
+    });
+    parser.on("field", (fieldname, value) => {
+      if (fieldname === "payload") {
+        const payload = JSON.parse(value) as IplexWebhook;
+        const regex = new RegExp(
+          /me\.sachaw\.agents\.anilist:\/\/(?<id>.*)\/[0-9]\//
+        );
+        const providerMediaId = regex.exec(payload.Metadata.guid);
 
-      if (
-        payload.event === "media.scrobble" &&
-        providerMediaId?.groups &&
-        providerMediaId.groups.id
-      ) {
-        const graphQLClient = new GraphQLClient(process.env.FORWARD_URL ?? "");
+        if (
+          payload.event === "media.scrobble" &&
+          providerMediaId?.groups &&
+          providerMediaId.groups.id
+        ) {
+          const graphQLClient = new GraphQLClient(
+            process.env.FORWARD_URL ?? ""
+          );
 
-        const mutation = gql`
-          mutation scrobble($scrobbleWebhookInput: WebhookInput!) {
-            scrobble(webhookInput: $scrobbleWebhookInput)
-          }
-        `;
-        const variables = {
-          scrobbleWebhookInput: {
-            secret,
-            plexId: payload.Account.id,
-            serverUUID: payload.Server.uuid,
-            providerMediaId: providerMediaId?.groups.id,
-            episode: payload.Metadata.index,
-          },
-        };
-        await graphQLClient.request(mutation, variables);
+          const mutation = gql`
+            mutation scrobble($scrobbleWebhookInput: WebhookInput!) {
+              scrobble(webhookInput: $scrobbleWebhookInput)
+            }
+          `;
+          const variables = {
+            scrobbleWebhookInput: {
+              secret,
+              plexId: payload.Account.id,
+              serverUUID: payload.Server.uuid,
+              providerMediaId: providerMediaId?.groups.id,
+              episode: payload.Metadata.index,
+            },
+          };
+          void graphQLClient.request(mutation, variables);
+        }
       }
-    }
+    });
+
+    req.pipe(parser);
   }
 
   res.send(null);

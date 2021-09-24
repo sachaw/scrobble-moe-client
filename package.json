@@ -24,8 +24,7 @@
     "@emotion/styled": "^11.3.0",
     "@fontsource/lexend": "^4.5.1",
     "@simplewebauthn/browser": "^4.1.0",
-    "@types/async-busboy": "^0.7.1",
-    "async-busboy": "^1.1.0",
+    "busboy": "^0.3.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.6.0",
     "graphql-request": "^3.5.0",
@@ -42,6 +41,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
     "@simplewebauthn/typescript-types": "^4.0.0",
+    "@types/busboy": "^0.2.4",
     "@types/react": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
