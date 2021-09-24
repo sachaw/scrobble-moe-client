@@ -86,7 +86,7 @@ const AddServer = (): JSX.Element => {
                 <Flex justify="space-between">
                   <div>{server.name}</div>
                   {serversLinking ? (
-                    <Button disabled my="auto" px="10" as="a" size="sm">
+                    <Button disabled variant="outline" marginTop={4} size="sm">
                       Linking...
                     </Button>
                   ) : (

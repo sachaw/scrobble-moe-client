@@ -165,10 +165,9 @@ const Dashboard = (): JSX.Element => {
               </Heading>
               <Box ml="auto" my="auto">
                 {linkableAccounts.map((account, index) => (
-                  <>
+                  <Flex direction="column" key={index}>
                     {providerLoginUrls.loading && (
                       <Button
-                        key={index}
                         mx="1"
                         marginTop={2}
                         as="a"
@@ -181,7 +180,6 @@ const Dashboard = (): JSX.Element => {
 
                     {providerLoginUrls.data && (
                       <Button
-                        key={index}
                         mx="1"
                         marginTop={2}
                         as="a"
@@ -196,7 +194,7 @@ const Dashboard = (): JSX.Element => {
                         Link {account}
                       </Button>
                     )}
-                  </>
+                  </Flex>
                 ))}
                 {usersData.data.users[0].accounts.map((account) => (
                   <Tooltip

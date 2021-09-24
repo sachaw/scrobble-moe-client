@@ -1,15 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client';
 import {
   Box,
   Button,
+  Code,
   Heading,
-  Link,
+  Text,
   useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const Auth = (): JSX.Element => {
   const router = useRouter();
@@ -33,17 +34,13 @@ const Auth = (): JSX.Element => {
             code: router.query.code,
           },
         },
+      }).catch(() => {
+        setError("Error linking account");
       });
     } else {
       setError("No code found");
     }
   }, [router.query.code]);
-
-  React.useEffect(() => {
-    if (linkedAccount.data && !linkedAccount.error) {
-      setError("Request errored");
-    }
-  });
 
   return (
     <>
@@ -56,13 +53,18 @@ const Auth = (): JSX.Element => {
       >
         <Heading textAlign="center">Link your AniList account.</Heading>
 
-        {error && <Heading textAlign="center">{error}</Heading>}
+        {error && <Text textAlign="center">{error}</Text>}
         <Box textAlign="center" marginTop={4}>
-          {router.query.code}
+          <Code overflowWrap="anywhere">{router.query.code}</Code>
           {linkedAccount.error && (
-            <Box color="red.500" marginTop={2}>
-              {linkedAccount.error.message}
-            </Box>
+            <>
+              <Box color="red.500" marginTop={2}>
+                {linkedAccount.error.message}
+              </Box>
+              <Button as="a" href="/dashboard" variant="outline" marginTop={4}>
+                Go to Dashboard
+              </Button>
+            </>
           )}
           {linkedAccount.data && (
             <>
@@ -70,11 +72,9 @@ const Auth = (): JSX.Element => {
                 Success!
               </Box>
 
-              <Link href="/dashboard" passHref>
-                <Button variantColor="green" variant="outline" marginTop={4}>
-                  Go to Dashboard
-                </Button>
-              </Link>
+              <Button as="a" href="/dashboard" variant="outline" marginTop={4}>
+                Go to Dashboard
+              </Button>
             </>
           )}
         </Box>
