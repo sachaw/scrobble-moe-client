@@ -1,0 +1,74 @@
+{
+  "name": "nextchakra-starter",
+  "version": "0.1.0",
+  "private": true,
+  "author": "sozonome",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "eslint src --fix && yarn format",
+    "format": "prettier --write src",
+    "up-latest": "yarn upgrade-interactive --latest",
+    "release": "standard-version",
+    "push-release": "git push --follow-tags origin main"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.13",
+    "@chakra-ui/react": "^1.6.7",
+    "@emotion/cache": "^11.4.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "@fontsource/lexend": "^4.5.1",
+    "@simplewebauthn/browser": "^4.1.0",
+    "@types/async-busboy": "^0.7.1",
+    "async-busboy": "^1.1.0",
+    "framer-motion": "^4.1.17",
+    "graphql": "^15.6.0",
+    "graphql-request": "^3.5.0",
+    "next": "^11.1.2",
+    "next-pwa": "^5.3.1",
+    "next-seo": "^4.26.0",
+    "next-transpile-modules": "^8.0.0",
+    "plex-oauth": "^2.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "universal-base64": "^2.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
+    "@simplewebauthn/typescript-types": "^4.0.0",
+    "@types/react": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "@verypossible/eslint-config": "^1.6.1",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "commitlint": "^13.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "lint-staged": "^11.1.2",
+    "next-sitemap": "^1.6.164",
+    "prettier": "^2.4.1",
+    "standard-version": "^9.3.1",
+    "typescript": "^4.4.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings=0",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
+  }
+}
