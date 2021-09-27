@@ -17,7 +17,7 @@ interface webAuthnProps {
   setError: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
+const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
   const [webAuthnOptions, getWebAuthnOptions] = useMutation<
     IAuthenticateResponse,
     IAuthenticateVariables
@@ -64,3 +64,5 @@ export const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
     </Box>
   );
 };
+
+export default Token;
