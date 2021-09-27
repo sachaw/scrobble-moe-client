@@ -32,7 +32,7 @@ interface webAuthnProps {
   setError: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export const WebAuthn = ({
+const WebAuthn = ({
   type,
   options,
   plexToken,
@@ -124,3 +124,5 @@ export const WebAuthn = ({
     </Card>
   );
 };
+
+export default WebAuthn;
