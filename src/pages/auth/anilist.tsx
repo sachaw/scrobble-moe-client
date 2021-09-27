@@ -16,7 +16,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export const AniList = (): JSX.Element => {
+const AniList = (): JSX.Element => {
   const router = useRouter();
 
   const [linkedAccount, addLinkedAccount] = useMutation<
@@ -73,3 +73,5 @@ export const AniList = (): JSX.Element => {
     </>
   );
 };
+
+export default AniList;
