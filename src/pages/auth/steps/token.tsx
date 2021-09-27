@@ -10,7 +10,7 @@ import { useMutation } from 'urql';
 
 import { Box, Flex, Heading, Image } from '@chakra-ui/react';
 
-import { IWebAuthnOptionsType, WebAuthn } from './webAuthn';
+import WebAuthn, { IWebAuthnOptionsType } from './webAuthn';
 
 interface webAuthnProps {
   plexToken: string;
