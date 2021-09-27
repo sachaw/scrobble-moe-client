@@ -36,10 +36,9 @@ const Callback = (): JSX.Element => {
           }
           clearInterval(pollPin);
         })
-        .catch((e) => {
+        .catch((e: Error) => {
+          setError(e.message);
           clearInterval(pollPin);
-
-          setError("Request errored");
         });
     }, 1000);
   };

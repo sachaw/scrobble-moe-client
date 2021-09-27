@@ -28,7 +28,7 @@ export const AniList = (): JSX.Element => {
     if (router.query.code?.length) {
       void addLinkedAccount({
         Input: {
-          code: router.query.code,
+          code: router.query.code as string,
         },
       });
     }
