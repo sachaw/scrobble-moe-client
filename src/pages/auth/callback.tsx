@@ -6,7 +6,7 @@ import { plexOauth } from 'util/plex';
 
 import { Box, Heading, Text } from '@chakra-ui/react';
 
-import { Token } from './steps/token';
+import Token from './steps/token';
 
 const Callback = (): JSX.Element => {
   const router = useRouter();
