@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex } from '@chakra-ui/react';
 
-import Footer from "./Footer";
-import Header from "./Header";
+import { Footer } from './Footer';
+import { Header } from './Header';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
-const Layout = ({ children }: LayoutProps): JSX.Element => {
+export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out" h="100vh">
       {/* <Flex> */}
@@ -26,5 +26,3 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
     </Box>
   );
 };
-
-export default Layout;

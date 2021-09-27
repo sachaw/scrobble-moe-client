@@ -1,63 +1,39 @@
 import React from 'react';
 
 import { Card } from 'components/Card';
+import {
+  ILinkServerResponse,
+  ILinkServerVariables,
+  LINK_SERVER,
+} from 'graphql/mutations/linkServer';
+import {
+  IPlexAccountServersResponse,
+  PLEX_ACCOUNT_SERVERS,
+} from 'graphql/queries/plexAccountServers';
+import { useMutation, useQuery } from 'urql';
 
-import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Flex } from '@chakra-ui/react';
 
-export interface IPlexAccountServersResponse {
-  getPlexAccountServers: [
-    {
-      name: string;
-      address: string;
-      port: number;
-      version: string;
-      scheme: string;
-      host: string;
-      localAddresses: string;
-      machineIdentifier: string;
-    }
-  ];
-}
-
-const PLEX_ACCOUNT_SERVERS = gql`
-  query PlexAccountServersQuery {
-    getPlexAccountServers {
-      name
-      address
-      port
-      version
-      scheme
-      host
-      localAddresses
-      machineIdentifier
-    }
-  }
-`;
-
-const LINK_SERVER = gql`
-  mutation LinkServerMutation($Input: LinkServerInput!) {
-    linkServer(linkServerInput: $Input) {
-      id
-    }
-  }
-`;
-
-const AddServer = (): JSX.Element => {
-  const [getLinkedServer, linkedServer] = useMutation(LINK_SERVER);
+export const AddServer = (): JSX.Element => {
+  const [linkedServer, getLinkedServer] = useMutation<
+    ILinkServerResponse,
+    ILinkServerVariables
+  >(LINK_SERVER);
   const [serversLinking, setServersLinking] = React.useState(false);
   const [error, setError] = React.useState<string>();
 
-  const { ...plexAccountServers } =
-    useQuery<IPlexAccountServersResponse>(PLEX_ACCOUNT_SERVERS);
+  const [plexAccountServers, fetchPlexAccountServers] = useQuery<
+    IPlexAccountServersResponse,
+    ILinkServerVariables
+  >({
+    query: PLEX_ACCOUNT_SERVERS,
+  });
 
   const linkServer = (machineIdentifier: string): void => {
     setServersLinking(true);
     void getLinkedServer({
-      variables: {
-        Input: {
-          machineIdentifier,
-        },
+      Input: {
+        machineIdentifier,
       },
     })
       .then(() => {
@@ -76,7 +52,7 @@ const AddServer = (): JSX.Element => {
           <div>{error}</div>
         </>
       )}
-      {plexAccountServers.loading ? (
+      {plexAccountServers.fetching ? (
         <div>Loading...</div>
       ) : (
         <div>
@@ -111,5 +87,3 @@ const AddServer = (): JSX.Element => {
     </Card>
   );
 };
-
-export default AddServer;

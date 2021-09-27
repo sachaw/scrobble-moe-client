@@ -1,21 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { Flex, useColorMode } from "@chakra-ui/react";
+import { Flex } from '@chakra-ui/react';
 
-import HelperImage from "./HelperImage";
+import { HelperImage } from './HelperImage';
 
-const SomeImage = (): JSX.Element => {
-  const { colorMode } = useColorMode();
-
+export const SomeImage = (): JSX.Element => {
   return (
-    <>
-      <Flex marginY={4} justifyContent="center" alignItems="center">
-        <HelperImage src="/plex.svg" label="Plex" />
-        <HelperImage src="/anilist.svg" label="AniList" />
-        <HelperImage src="/kitsu.svg" label="Kitsu" />
-      </Flex>
-    </>
+    <Flex marginY={4} justifyContent="center" alignItems="center">
+      <HelperImage src="/plex.svg" label="Plex" />
+      <HelperImage src="/anilist.svg" label="AniList" />
+      <HelperImage src="/kitsu.svg" label="Kitsu" />
+    </Flex>
   );
 };
-
-export default SomeImage;

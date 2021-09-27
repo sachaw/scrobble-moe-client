@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading } from '@chakra-ui/react';
 
-import ThemeToggle from "./ThemeToggle";
+import { ThemeToggle } from './ThemeToggle';
 
-const Header = (): JSX.Element => {
+export const Header = (): JSX.Element => {
   return (
     <Flex as="header" width="full" align="center">
       <Heading as="h1" size="md">
@@ -19,5 +19,3 @@ const Header = (): JSX.Element => {
     </Flex>
   );
 };
-
-export default Header;

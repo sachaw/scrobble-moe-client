@@ -1,21 +1,28 @@
 import React from 'react';
 
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
 
-type CardProps = {
+interface CardProps extends BoxProps {
   children: React.ReactNode;
   nested?: boolean;
-};
+}
 
-export const Card = ({ children, nested = false }: CardProps): JSX.Element => {
+export const Card = ({
+  children,
+  nested = false,
+  ...props
+}: CardProps): JSX.Element => {
   return (
     <Box
-      bg={useColorModeValue("white", nested ? "gray.800" : "gray.700")}
+      {...props}
+      bg={useColorModeValue(
+        nested ? "gray.50" : "white",
+        nested ? "gray.800" : "gray.700"
+      )}
       py="8"
-      mb="2rem"
       px={{ base: "4", md: "10" }}
       shadow="base"
-      rounded={{ sm: "lg" }}
+      rounded="lg"
     >
       {children}
     </Box>

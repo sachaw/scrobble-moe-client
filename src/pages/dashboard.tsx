@@ -1,9 +1,15 @@
 import React from 'react';
 
 import { Card } from 'components/Card';
+import {
+  IProviderLoginUrlResponse,
+  IProviderLoginUrlVariables,
+  PROVIDER_LOGIN_URLS,
+} from 'graphql/queries/providerLoginUrl';
+import { IUserResponse, IUserVariables, USER } from 'graphql/queries/user';
 import { FaClipboard, FaClipboardCheck } from 'react-icons/fa';
+import { useQuery } from 'urql';
 
-import { gql, useLazyQuery, useQuery } from '@apollo/client';
 import {
   Box,
   Button,
@@ -17,49 +23,6 @@ import {
   useClipboard,
 } from '@chakra-ui/react';
 
-export interface IUserResponse {
-  users: [
-    {
-      id: string;
-      email: string;
-      role: "ADMIN" | "USER";
-      username: string;
-      thumb: string;
-      accounts: [
-        {
-          id: string;
-          accountId: string;
-          provider: string;
-        }
-      ];
-      scrobbles: [
-        {
-          id: string;
-          providerMediaId: string;
-          episode: number;
-        }
-      ];
-      servers: [
-        {
-          id: string;
-          uuid: string;
-          name: string;
-          secret: string;
-        }
-      ];
-    }
-  ];
-}
-
-export interface IProviderLoginUrlResponse {
-  providerLoginUrl: [
-    {
-      provider: string;
-      url: string;
-    }
-  ];
-}
-
 const Dashboard = (): JSX.Element => {
   const [clipboardServer, setClipboardServer] = React.useState<string>("");
   const { hasCopied, onCopy } = useClipboard(clipboardServer);
@@ -68,44 +31,9 @@ const Dashboard = (): JSX.Element => {
     "ANILIST",
     "KITSU",
   ]);
-  const USER = gql`
-    query UserQuery($Input: UserFindManyInput!) {
-      users(userFindManyInput: $Input) {
-        id
-        email
-        role
-        username
-        thumb
-        accounts {
-          id
-          accountId
-          provider
-        }
-        scrobbles {
-          id
-          providerMediaId
-          episode
-        }
-        servers {
-          id
-          uuid
-          name
-          secret
-        }
-      }
-    }
-  `;
 
-  const PROVIDER_LOGIN_URLS = gql`
-    query ProviderLoginUrlQuery($Input: ProviderLoginUrlInput!) {
-      providerLoginUrl(providerLoginUrlInput: $Input) {
-        provider
-        url
-      }
-    }
-  `;
-
-  const { ...usersData } = useQuery<IUserResponse>(USER, {
+  const [usersData, fetchUsersData] = useQuery<IUserResponse, IUserVariables>({
+    query: USER,
     variables: {
       Input: {
         take: 5,
@@ -113,14 +41,18 @@ const Dashboard = (): JSX.Element => {
     },
   });
 
-  const [getProviderLoginUrls, { ...providerLoginUrls }] =
-    useLazyQuery<IProviderLoginUrlResponse>(PROVIDER_LOGIN_URLS, {
-      variables: {
-        Input: {
-          providers: linkableAccounts,
-        },
+  const [providerLoginUrls, fetchProviderLoginUrls] = useQuery<
+    IProviderLoginUrlResponse,
+    IProviderLoginUrlVariables
+  >({
+    query: PROVIDER_LOGIN_URLS,
+    variables: {
+      Input: {
+        providers: linkableAccounts,
       },
-    });
+    },
+    pause: true,
+  });
 
   React.useEffect(() => {
     if (usersData.data) {
@@ -133,13 +65,13 @@ const Dashboard = (): JSX.Element => {
 
       setLinkableAccounts(filteredLinkableAccounts);
 
-      getProviderLoginUrls();
+      fetchProviderLoginUrls();
     }
   }, [usersData.data]);
 
   return (
     <>
-      {usersData.loading && (
+      {usersData.fetching && (
         <Box>
           <Text>Loading...</Text>
         </Box>
@@ -151,7 +83,7 @@ const Dashboard = (): JSX.Element => {
       )}
       {usersData.data && (
         <>
-          <Card>
+          <Card mb="1rem">
             <Flex direction="row">
               <Image
                 h="4rem"
@@ -165,8 +97,8 @@ const Dashboard = (): JSX.Element => {
               </Heading>
               <Box ml="auto" my="auto">
                 {linkableAccounts.map((account, index) => (
-                  <Flex direction="column" key={index}>
-                    {providerLoginUrls.loading && (
+                  <Box key={index}>
+                    {providerLoginUrls.fetching && (
                       <Button
                         mx="1"
                         marginTop={2}
@@ -194,7 +126,7 @@ const Dashboard = (): JSX.Element => {
                         Link {account}
                       </Button>
                     )}
-                  </Flex>
+                  </Box>
                 ))}
                 {usersData.data.users[0].accounts.map((account) => (
                   <Tooltip
@@ -219,7 +151,7 @@ const Dashboard = (): JSX.Element => {
               </Box>
             </Flex>
           </Card>
-          <Card>
+          <Card mb="1rem">
             <Flex justify="space-between" mb="2">
               <Heading as="h5" my="auto">
                 Plex Servers:
@@ -235,14 +167,14 @@ const Dashboard = (): JSX.Element => {
                   <Flex>
                     <Input
                       w="16rem"
-                      value={`https://scrobble.moe/api/${server.secret}`}
+                      value={`https://webhook.scrobble.moe/api/${server.secret}`}
                       isReadOnly
                       placeholder="Welcome"
                     />
                     <Button
                       onClick={(): void => {
                         setClipboardServer(
-                          `https://scrobble.moe/api/${server.secret}`
+                          `https://webhook.scrobble.moe/api/${server.secret}`
                         );
                         onCopy();
                       }}
@@ -255,31 +187,33 @@ const Dashboard = (): JSX.Element => {
               </Card>
             ))}
           </Card>
-          <Card>
-            {usersData.data.users[0].scrobbles.map((scrobble) => (
-              <Card nested key={scrobble.id}>
-                <Flex>
-                  <Heading as="h5">{scrobble.providerMediaId}</Heading>
-                  <Progress
-                    w="full"
-                    my="auto"
-                    mx="4"
-                    value={100 / scrobble.episode}
-                  />
-                  <Button
-                    my="auto"
-                    px="10"
-                    as="a"
-                    href={`https://anilist.co/anime/${scrobble.providerMediaId}`}
-                    target="_blank"
-                    size="sm"
-                  >
-                    View on AniList
-                  </Button>
-                </Flex>
-              </Card>
-            ))}
-          </Card>
+          {usersData.data.users[0].scrobbles.length > 0 && (
+            <Card>
+              {usersData.data.users[0].scrobbles.map((scrobble) => (
+                <Card nested key={scrobble.id}>
+                  <Flex>
+                    <Heading as="h5">{scrobble.providerMediaId}</Heading>
+                    <Progress
+                      w="full"
+                      my="auto"
+                      mx="4"
+                      value={100 / scrobble.episode}
+                    />
+                    <Button
+                      my="auto"
+                      px="10"
+                      as="a"
+                      href={`https://anilist.co/anime/${scrobble.providerMediaId}`}
+                      target="_blank"
+                      size="sm"
+                    >
+                      View on AniList
+                    </Button>
+                  </Flex>
+                </Card>
+              ))}
+            </Card>
+          )}
         </>
       )}
     </>

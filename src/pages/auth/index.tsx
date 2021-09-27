@@ -1,20 +1,12 @@
 import React from 'react';
 
 import Link from 'next/link';
-import { PlexOauth } from 'plex-oauth';
+import { plexOauth } from 'util/plex';
 
 import { Box, Button, Heading, useColorModeValue } from '@chakra-ui/react';
 
 const Auth = (): JSX.Element => {
   const [plexUrl, setPlexUrl] = React.useState<string>();
-
-  const plexOauth = new PlexOauth({
-    clientIdentifier: "7f9de3ba-e12b-11ea-87d0-0242ac130003",
-    product: "scrobble.moe",
-    device: "Internet",
-    version: "1",
-    forwardUrl: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
-  });
 
   const getPlexAuthUrl = async (): Promise<void> => {
     const [url, pin] = await plexOauth.requestHostedLoginURL();

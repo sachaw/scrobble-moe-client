@@ -16,14 +16,13 @@
     "push-release": "git push --follow-tags origin main"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.13",
     "@chakra-ui/react": "^1.6.7",
-    "@emotion/cache": "^11.4.0",
     "@emotion/react": "^11.4.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@fontsource/lexend": "^4.5.1",
     "@simplewebauthn/browser": "^4.1.0",
+    "@urql/devtools": "^2.0.3",
     "busboy": "^0.3.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.6.0",
@@ -36,7 +35,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "universal-base64": "^2.1.0"
+    "universal-base64": "^2.1.0",
+    "urql": "^2.0.5"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",

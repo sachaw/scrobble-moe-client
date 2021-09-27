@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 import {
   Box,
@@ -9,7 +9,7 @@ import {
   Image,
   Text,
   useColorMode,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const Page404 = (): JSX.Element => {
   const { colorMode } = useColorMode();

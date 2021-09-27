@@ -5,7 +5,7 @@ import { BsViewStacked } from 'react-icons/bs';
 
 import { Box, Button, Code, Flex } from '@chakra-ui/react';
 
-const CTASection = (): JSX.Element => {
+export const CTASection = (): JSX.Element => {
   return (
     <Box textAlign="center" marginTop={8}>
       <Box marginY={2}>
@@ -33,5 +33,3 @@ const CTASection = (): JSX.Element => {
     </Box>
   );
 };
-
-export default CTASection;
