@@ -14,7 +14,7 @@ import { useMutation, useQuery } from 'urql';
 
 import { Button, Flex } from '@chakra-ui/react';
 
-export const AddServer = (): JSX.Element => {
+const AddServer = (): JSX.Element => {
   const [linkedServer, getLinkedServer] = useMutation<
     ILinkServerResponse,
     ILinkServerVariables
@@ -87,3 +87,5 @@ export const AddServer = (): JSX.Element => {
     </Card>
   );
 };
+
+export default AddServer;
