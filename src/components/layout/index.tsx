@@ -11,18 +11,19 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out" h="100vh">
-      {/* <Flex> */}
-      <Box p="8" h="full">
-        <Flex direction="column" h="full">
-          <Header />
-          <Box as="main" marginY={22} flexGrow={1}>
-            {children}
-          </Box>
-          <Footer />
-        </Flex>
-      </Box>
-      {/* </Flex> */}
+    <Box h="100vh">
+      <Flex direction="column" h="full">
+        <Header />
+        <Box as="main" flexGrow={1}>
+          {children}
+        </Box>
+        <Footer />
+      </Flex>
     </Box>
+    // <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out" h="100vh">
+    //   {/* <Flex> */}
+
+    //   {/* </Flex> */}
+    // </Box>
   );
 };
