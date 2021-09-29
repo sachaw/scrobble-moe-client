@@ -26,22 +26,25 @@ import {
 const Dashboard = (): JSX.Element => {
   const [clipboardServer, setClipboardServer] = React.useState<string>("");
   const { hasCopied, onCopy } = useClipboard(clipboardServer);
+  const [unlinkedAccounts, setUnlinkedAccounts] = React.useState<string[]>([]);
 
-  const [linkableAccounts, setLinkableAccounts] = React.useState([
+  const [linkableAccounts, refetchLinkableAccounts] = React.useState([
     "ANILIST",
     "KITSU",
   ]);
 
-  const [usersData, fetchUsersData] = useQuery<IUserResponse, IUserVariables>({
-    query: USER,
-    variables: {
-      Input: {
-        take: 5,
+  const [usersData, refetchUsersData] = useQuery<IUserResponse, IUserVariables>(
+    {
+      query: USER,
+      variables: {
+        Input: {
+          take: 5,
+        },
       },
-    },
-  });
+    }
+  );
 
-  const [providerLoginUrls, fetchProviderLoginUrls] = useQuery<
+  const [providerLoginUrls, refetchProviderLoginUrls] = useQuery<
     IProviderLoginUrlResponse,
     IProviderLoginUrlVariables
   >({
@@ -51,23 +54,19 @@ const Dashboard = (): JSX.Element => {
         providers: linkableAccounts,
       },
     },
-    pause: true,
   });
 
   React.useEffect(() => {
-    if (usersData.data) {
-      const filteredLinkableAccounts = linkableAccounts.filter(
-        (linkableAccount) =>
-          !usersData.data?.users[0].accounts
-            .map((account) => account.provider)
-            .includes(linkableAccount)
-      );
+    const userAccounts =
+      usersData?.data?.users[0]?.accounts.map((account) => account.provider) ??
+      [];
 
-      setLinkableAccounts(filteredLinkableAccounts);
-
-      fetchProviderLoginUrls();
-    }
-  }, [usersData.data]);
+    setUnlinkedAccounts(
+      linkableAccounts
+        .map((account) => (userAccounts.includes(account) ? "" : account))
+        .filter((acc) => acc)
+    );
+  }, [linkableAccounts, usersData.data]);
 
   return (
     <>
@@ -96,7 +95,7 @@ const Dashboard = (): JSX.Element => {
                 {usersData.data.users[0].username}
               </Heading>
               <Box ml="auto" my="auto">
-                {linkableAccounts.map((account, index) => (
+                {unlinkedAccounts.map((account, index) => (
                   <Box key={index}>
                     {providerLoginUrls.fetching && (
                       <Button

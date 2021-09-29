@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Card } from 'components/Card';
-import { useRouter } from 'next/dist/client/router';
 import { plexOauth } from 'util/plex';
 
 import { Box, Heading, Text } from '@chakra-ui/react';
@@ -9,8 +8,6 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import Token from './steps/token';
 
 const Callback = (): JSX.Element => {
-  const router = useRouter();
-
   const [error, setError] = React.useState<string>();
   const [plexToken, setPlexToken] = React.useState<string>();
 

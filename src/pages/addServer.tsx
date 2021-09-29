@@ -22,7 +22,7 @@ const AddServer = (): JSX.Element => {
   const [serversLinking, setServersLinking] = React.useState(false);
   const [error, setError] = React.useState<string>();
 
-  const [plexAccountServers, fetchPlexAccountServers] = useQuery<
+  const [plexAccountServers, refetchPlexAccountServers] = useQuery<
     IPlexAccountServersResponse,
     ILinkServerVariables
   >({
