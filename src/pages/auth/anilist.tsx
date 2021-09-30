@@ -8,13 +8,7 @@ import {
 import { useRouter } from 'next/router';
 import { useMutation } from 'urql';
 
-import {
-  Box,
-  Button,
-  Code,
-  Heading,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Button, Code, Heading } from '@chakra-ui/react';
 
 const AniList = (): JSX.Element => {
   const router = useRouter();
@@ -32,12 +26,12 @@ const AniList = (): JSX.Element => {
         },
       });
     }
-  }, [router.query.code]);
+  }, [router.query.code, addLinkedAccount]);
 
   return (
     <>
       <Box
-        bg={useColorModeValue("white", "gray.700")}
+        bg="gray.700"
         py="8"
         px={{ base: "4", md: "10" }}
         shadow="base"

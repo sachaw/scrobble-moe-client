@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 
 import { LoginButton } from './LoginButton';
-import { ThemeToggle } from './ThemeToggle';
 
 export const Header = (): JSX.Element => {
   return (
@@ -16,7 +15,6 @@ export const Header = (): JSX.Element => {
 
       <Box marginLeft="auto" experimental_spaceX="2">
         <LoginButton />
-        <ThemeToggle />
       </Box>
     </Flex>
   );

@@ -16,11 +16,9 @@ import {
   Progress,
   Skeleton,
   useBreakpointValue,
-  useColorMode,
 } from '@chakra-ui/react';
 
 const Home = (): JSX.Element => {
-  const { colorMode } = useColorMode();
   const [latestScrobbles, refetchLatestScrobbles] =
     useQuery<ILatestScrobblesResponse>({
       query: LATEST_SCROBBLES,
@@ -43,11 +41,7 @@ const Home = (): JSX.Element => {
             backgroundSize="contain"
             backgroundPosition="right"
             backgroundRepeat="no-repeat"
-            backgroundColor={
-              colorMode === "light"
-                ? "rgba(175, 0, 219, 0.2)"
-                : "rgba(175, 0, 219, 0.1)"
-            }
+            backgroundColor="rgba(175, 0, 219, 0.1)"
             height="28rem"
           >
             <Flex h="full">
@@ -164,19 +158,7 @@ const Home = (): JSX.Element => {
                 {latestScrobbles.data &&
                   latestScrobbles.data.latestScrobbles.map(
                     (scrobble, index) => (
-                      <Box
-                        userSelect="none"
-                        key={index}
-                        w="full"
-                        backgroundColor={
-                          colorMode === "light" ? "gray.200" : "gray.500"
-                        }
-                        rounded="lg"
-                        _hover={{
-                          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-                          backgroundColor: "gray.300",
-                        }}
-                      >
+                      <Card key={index} defaultPadding={false}>
                         <Flex>
                           <Image
                             src={scrobble.anilistData.coverImage}
@@ -217,7 +199,7 @@ const Home = (): JSX.Element => {
                             %
                           </Box>
                         </Flex>
-                      </Box>
+                      </Card>
                     )
                   )}
               </Box>
@@ -227,13 +209,7 @@ const Home = (): JSX.Element => {
                 Popular scrobbles
               </Heading>
               <Box>
-                <Box
-                  w="full"
-                  backgroundColor={
-                    colorMode === "light" ? "gray.200" : "gray.500"
-                  }
-                  rounded="lg"
-                >
+                <Box w="full" backgroundColor="gray.500" rounded="lg">
                   <Image
                     src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125446-EXB91ho7ffCn.jpg"
                     roundedLeft="lg"

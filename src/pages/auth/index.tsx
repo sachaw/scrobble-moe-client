@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { plexOauth } from 'util/plex';
 
-import { Box, Button, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 
 const Auth = (): JSX.Element => {
   const [plexUrl, setPlexUrl] = React.useState<string>();
@@ -21,7 +21,7 @@ const Auth = (): JSX.Element => {
   return (
     <>
       <Box
-        bg={useColorModeValue("white", "gray.700")}
+        bg="gray.700"
         py="8"
         px={{ base: "4", md: "10" }}
         shadow="base"
