@@ -175,7 +175,13 @@ const Home = (): JSX.Element => {
                             />
                           </Flex>
                           <Box w="full" mx="1rem">
-                            <Heading size="md" my="0.5rem">
+                            <Heading
+                              size="md"
+                              my="0.5rem"
+                              whiteSpace="nowrap"
+                              textOverflow="ellipsis"
+                              overflow="hidden"
+                            >
                               {scrobble.anilistData.title}
                             </Heading>
                             <Progress

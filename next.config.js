@@ -14,10 +14,12 @@ module.exports = withPWA(
       // to re-generate manifest.json, you can visit https://tomitm.github.io/appmanifest/
       dest: "public",
       register: true,
-
-      experimental: { esmExternals: true },
-      esmExternals: true,
-      reactStrictMode: true,
     },
+    images: {
+      domains: ["plex.tv"],
+    },
+    experimental: { esmExternals: true },
+    esmExternals: true,
+    reactStrictMode: true,
   })
 );

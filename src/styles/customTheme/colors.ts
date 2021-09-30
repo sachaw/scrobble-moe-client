@@ -7,13 +7,13 @@ export const extendedColors: DeepPartial<
   brand: {
     100: "",
     200: "",
-    300: "",
-    400: "",
-    500: "",
-    600: "",
-    700: "",
-    800: "",
-    900: "",
+    300: "#33323E", //Border
+    400: "#6C6B7B", //Text
+    500: "#853BCE", //Selected/Hover
+    600: "#33323E", //Button/Link/Important
+    700: "#211F2D", //Nested
+    800: "#181622", //Content
+    900: "#13111C", //Background
   },
 };
 

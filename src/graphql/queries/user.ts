@@ -1,5 +1,7 @@
 import { gql } from 'urql';
 
+import { IAniListData } from './latestScrobbles';
+
 export interface IUserResponse {
   users: [
     {
@@ -20,6 +22,13 @@ export interface IUserResponse {
           id: string;
           providerMediaId: string;
           episode: number;
+          updatedAt: string;
+          accounts: [
+            {
+              provider: "ANILIST" | "KISTU";
+            }
+          ];
+          anilistData?: IAniListData;
         }
       ];
       servers: [
@@ -53,10 +62,25 @@ export const USER = gql`
         accountId
         provider
       }
+
       scrobbles {
         id
         providerMediaId
         episode
+        updatedAt
+        accounts {
+          provider
+        }
+        anilistData {
+          id
+          title
+          type
+          status
+          description
+          coverImage
+          bannerImage
+          episodes
+        }
       }
       servers {
         id

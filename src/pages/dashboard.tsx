@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { Card } from 'components/Card';
+import { Card } from 'components/new/Card';
+import { SelectableCard } from 'components/new/SelectableCard';
 import {
   IProviderLoginUrlResponse,
   IProviderLoginUrlVariables,
   PROVIDER_LOGIN_URLS,
 } from 'graphql/queries/providerLoginUrl';
 import { IUserResponse, IUserVariables, USER } from 'graphql/queries/user';
+import Image from 'next/image';
 import { FaClipboard, FaClipboardCheck } from 'react-icons/fa';
+import { FiMoreVertical } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
 import {
@@ -16,9 +19,7 @@ import {
   Center,
   Flex,
   Heading,
-  Image,
   Input,
-  Progress,
   Text,
   Tooltip,
   useClipboard,
@@ -84,14 +85,13 @@ const Dashboard = (): JSX.Element => {
         )}
         {usersData.data && (
           <>
-            <Card mb="1rem">
+            <Card title="Dashboard">
               <Flex direction="row">
                 <Image
-                  h="4rem"
-                  w="4rem"
-                  mr="2rem"
+                  width="64"
+                  height="64"
+                  className="rounded-full mr-8"
                   src={usersData.data.users[0].thumb}
-                  rounded="full"
                 />
                 <Heading as="h5" my="auto">
                   {usersData.data.users[0].username}
@@ -151,18 +151,17 @@ const Dashboard = (): JSX.Element => {
                   ))}
                 </Box>
               </Flex>
-            </Card>
-            <Card mb="1rem">
+
               <Flex justify="space-between" mb="2">
-                <Heading as="h5" my="auto">
-                  Plex Servers:
-                </Heading>
                 <Button href="/addServer" my="auto" px="10" as="a" size="sm">
                   Add server
                 </Button>
               </Flex>
-              {usersData.data.users[0].servers.map((server) => (
-                <Card nested key={server.id}>
+              <hr />
+              <br />
+              <h1>Servers</h1>
+              {usersData.data.users[0].servers.map((server, index) => (
+                <div key={index}>
                   <Flex justify="space-between">
                     <Text isTruncated>{server.name}</Text>
                     <Flex>
@@ -185,36 +184,68 @@ const Dashboard = (): JSX.Element => {
                       </Button>
                     </Flex>
                   </Flex>
-                </Card>
+                </div>
               ))}
+              <hr />
+              <br />
+              {usersData.data.users[0].scrobbles.length > 0 && (
+                <div className="space-y-2">
+                  {usersData.data.users[0].scrobbles.map((scrobble) => (
+                    <SelectableCard status="success" key={scrobble.id}>
+                      <div className="flex w-full justify-between">
+                        <div>
+                          <div className="flex text-gray-600">
+                            <small className="flex my-auto mr-1">Success</small>
+                            {scrobble.accounts.map((account, index) => (
+                              <Image
+                                className="my-auto"
+                                width="22"
+                                height="22"
+                                key={index}
+                                src={
+                                  account.provider === "ANILIST"
+                                    ? "/anilist.svg"
+                                    : "/kitsu.svg"
+                                }
+                              />
+                            ))}
+                          </div>
+                          <div>
+                            <p>{scrobble.anilistData?.title ?? "Unknown"}</p>
+                          </div>
+                        </div>
+                        <div>Episode {scrobble.episode}</div>
+                        <div className="flex">
+                          <small className="text-gray-600 my-auto mr-2">
+                            {new Date(scrobble.updatedAt).toLocaleString()}
+                          </small>
+                          <FiMoreVertical className="my-auto hover:text-gray-600 text-lg cursor-pointer" />
+                        </div>
+                      </div>
+                      {/* <Flex>
+                        <Heading as="h5">{scrobble.providerMediaId}</Heading>
+                        <Progress
+                          w="full"
+                          my="auto"
+                          mx="4"
+                          value={100 / scrobble.episode}
+                        />
+                        <Button
+                          my="auto"
+                          px="10"
+                          as="a"
+                          href={`https://anilist.co/anime/${scrobble.providerMediaId}`}
+                          target="_blank"
+                          size="sm"
+                        >
+                          View on AniList
+                        </Button>
+                      </Flex> */}
+                    </SelectableCard>
+                  ))}
+                </div>
+              )}
             </Card>
-            {usersData.data.users[0].scrobbles.length > 0 && (
-              <Card>
-                {usersData.data.users[0].scrobbles.map((scrobble) => (
-                  <Card nested key={scrobble.id}>
-                    <Flex>
-                      <Heading as="h5">{scrobble.providerMediaId}</Heading>
-                      <Progress
-                        w="full"
-                        my="auto"
-                        mx="4"
-                        value={100 / scrobble.episode}
-                      />
-                      <Button
-                        my="auto"
-                        px="10"
-                        as="a"
-                        href={`https://anilist.co/anime/${scrobble.providerMediaId}`}
-                        target="_blank"
-                        size="sm"
-                      >
-                        View on AniList
-                      </Button>
-                    </Flex>
-                  </Card>
-                ))}
-              </Card>
-            )}
           </>
         )}
       </Box>

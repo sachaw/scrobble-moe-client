@@ -1,4 +1,5 @@
 import '@fontsource/lexend/latin.css';
+import 'tailwindcss/tailwind.css';
 
 import React from 'react';
 

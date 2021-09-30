@@ -1,5 +1,21 @@
 import { gql } from 'urql';
 
+export interface IAniListData {
+  id: number;
+  title: string;
+  type: "ANIME" | "MANGA";
+  status:
+    | "FINISHED"
+    | "RELEASING"
+    | "NOT_YET_RELEASED"
+    | "CANCELLED"
+    | "HIATUS";
+  description: string;
+  coverImage: string;
+  bannerImage: string;
+  episodes: number;
+}
+
 export interface ILatestScrobblesResponse {
   latestScrobbles: {
     providerMediaId: string;
@@ -9,21 +25,7 @@ export interface ILatestScrobblesResponse {
     };
     startEpisode: number;
     endEpisode: number;
-    anilistData: {
-      id: number;
-      title: string;
-      type: "ANIME" | "MANGA";
-      status:
-        | "FINISHED"
-        | "RELEASING"
-        | "NOT_YET_RELEASED"
-        | "CANCELLED"
-        | "HIATUS";
-      description: string;
-      coverImage: string;
-      bannerImage: string;
-      episodes: number;
-    };
+    anilistData: IAniListData;
   }[];
 }
 

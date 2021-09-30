@@ -11,15 +11,15 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Box h="100vh">
+    <div className="h-screen w-screen bg-background">
       <Flex direction="column" h="full">
         <Header />
-        <Box as="main" flexGrow={1}>
+        <Box as="main" flexGrow={1} minH={0}>
           {children}
         </Box>
         <Footer />
       </Flex>
-    </Box>
+    </div>
     // <Box margin="0 auto" maxWidth={800} transition="0.5s ease-out" h="100vh">
     //   {/* <Flex> */}
 
