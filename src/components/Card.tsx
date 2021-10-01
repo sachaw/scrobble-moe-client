@@ -29,7 +29,6 @@ export const Card = ({
       <div className={`p-8 pb-4 ${tabs ? "" : "border-b"}`}>
         <h1 className="text-xl">{title}</h1>
       </div>
-      <div className="absolute right-4 top-4">{controlls}</div>
 
       {tabs && (
         <Tab.Group>

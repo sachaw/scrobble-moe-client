@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { IconButton } from 'components/IconButton';
 import {
   IScrobblesResponse,
   IScrobblesVariables,
   SCROBBLES,
 } from 'graphql/queries/scrobbles';
+import { FiRefreshCw } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
 import { ScrobbleCard, ScrobbleCardSkeleton } from '../ScrobbleCard';
@@ -23,7 +25,23 @@ export const ScrobblesGroup = (): JSX.Element => {
   });
 
   return (
-    <div>
+    <div className="flex flex-col space-y-2">
+      <div
+        className="-mt-4 mb-4 ml-auto"
+        onClick={(): void => {
+          refetchScrobbles({
+            requestPolicy: "network-only",
+          });
+        }}
+      >
+        <IconButton
+          icon={
+            <FiRefreshCw
+              className={scrobblesData.fetching ? "animate-spin" : ""}
+            />
+          }
+        />
+      </div>
       {scrobblesData.fetching && <ScrobbleCardSkeleton />}
       {scrobblesData.data && (
         <div>
