@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Card } from 'components/new/Card';
-import { SelectableCard } from 'components/new/SelectableCard';
+import { Card } from 'components/Card';
+import { SelectableCard } from 'components/SelectableCard';
 
 const tabs = [
   {

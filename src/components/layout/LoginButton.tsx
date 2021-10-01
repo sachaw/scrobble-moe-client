@@ -1,11 +1,9 @@
 import React from 'react';
 
 import { AUTH_CHECK, IAuthCheckResponse } from 'graphql/queries/authCheck';
-import { AiOutlineLogin } from 'react-icons/ai';
-import { FiHome } from 'react-icons/fi';
+import Link from 'next/link';
+import { FiHome, FiLoader, FiLogIn } from 'react-icons/fi';
 import { useQuery } from 'urql';
-
-import { Button, Spinner } from '@chakra-ui/react';
 
 export const LoginButton = (): JSX.Element => {
   const [authCheck, refetchAuthCheck] = useQuery<IAuthCheckResponse>({
@@ -14,19 +12,23 @@ export const LoginButton = (): JSX.Element => {
 
   if (authCheck.fetching) {
     return (
-      <Button leftIcon={<Spinner />} disabled>
-        Loading
-      </Button>
+      <div className="bg-gray-100 rounded-full p-4 cursor-default text-gray-600">
+        <FiLoader className="animate-spin" />
+      </div>
     );
   }
 
   return authCheck.data?.authCheck.authenticated ? (
-    <Button as="a" href="/dashboard" leftIcon={<FiHome />}>
-      Dashboard
-    </Button>
+    <Link passHref href="/dashboard">
+      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer">
+        <FiHome />
+      </div>
+    </Link>
   ) : (
-    <Button as="a" href="/auth" leftIcon={<AiOutlineLogin />}>
-      Login
-    </Button>
+    <Link passHref href="/auth">
+      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer">
+        <FiLogIn />
+      </div>
+    </Link>
   );
 };

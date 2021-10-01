@@ -158,7 +158,7 @@ const Home = (): JSX.Element => {
                 {latestScrobbles.data &&
                   latestScrobbles.data.latestScrobbles.map(
                     (scrobble, index) => (
-                      <Card key={index} defaultPadding={false}>
+                      <Card key={index} title="temp">
                         <Flex>
                           <Image
                             src={scrobble.anilistData.coverImage}

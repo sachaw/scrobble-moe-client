@@ -41,20 +41,15 @@ const Callback = (): JSX.Element => {
   };
 
   return (
-    <Card>
-      <Heading textAlign="center" mb="2rem">
-        Sign in with Plex
-      </Heading>
+    <Card title="Sign in with Plex">
       {error && (
         <Box color="red.500" marginTop={2}>
           <Text>{error}</Text>
         </Box>
       )}
-      <Card nested>
-        {!plexToken && <Heading>Checking plex pin.</Heading>}
+      {!plexToken && <Heading>Checking plex pin.</Heading>}
 
-        {plexToken && <Token plexToken={plexToken} setError={setError} />}
-      </Card>
+      {plexToken && <Token plexToken={plexToken} setError={setError} />}
     </Card>
   );
 };

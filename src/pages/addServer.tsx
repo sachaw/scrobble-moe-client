@@ -45,7 +45,7 @@ const AddServer = (): JSX.Element => {
       });
   };
   return (
-    <Card>
+    <Card title="Link Plex Server">
       {plexAccountServers.error && (
         <>
           <div>Error: {plexAccountServers.error.message}</div>
@@ -58,7 +58,7 @@ const AddServer = (): JSX.Element => {
         <div>
           {plexAccountServers.data &&
             plexAccountServers.data.getPlexAccountServers.map((server) => (
-              <Card nested key={server.machineIdentifier}>
+              <Card key={server.machineIdentifier} title="link">
                 <Flex justify="space-between">
                   <div>{server.name}</div>
                   {serversLinking ? (

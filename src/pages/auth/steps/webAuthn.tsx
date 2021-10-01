@@ -100,7 +100,7 @@ const WebAuthn = ({
   }, [webauthn.error, setError]);
 
   return (
-    <Card>
+    <Card title="temp">
       {!webauthn.data && (
         <Flex justify="space-between">
           <Text my="auto">Started Webauthn</Text>

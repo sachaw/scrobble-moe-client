@@ -3,44 +3,37 @@ import { gql } from 'urql';
 import { IAniListData } from './latestScrobbles';
 
 export interface IUserResponse {
-  users: [
-    {
-      id: string;
-      email: string;
-      role: "ADMIN" | "USER";
-      username: string;
-      thumb: string;
-      accounts: [
-        {
-          id: string;
-          accountId: string;
-          provider: string;
-        }
-      ];
-      scrobbles: [
-        {
-          id: string;
-          providerMediaId: string;
-          episode: number;
-          updatedAt: string;
-          accounts: [
-            {
-              provider: "ANILIST" | "KISTU";
-            }
-          ];
-          anilistData?: IAniListData;
-        }
-      ];
-      servers: [
-        {
-          id: string;
-          uuid: string;
-          name: string;
-          secret: string;
-        }
-      ];
-    }
-  ];
+  users: IUser[];
+}
+
+export interface IUser {
+  id: string;
+  email: string;
+  role: "ADMIN" | "USER";
+  username: string;
+  thumb: string;
+  accounts: {
+    id: string;
+    accountId: string;
+    provider: string;
+  }[];
+  scrobbles: {
+    id: string;
+    providerMediaId: string;
+    episode: number;
+    updatedAt: string;
+    accounts: {
+      provider: "ANILIST" | "KISTU";
+    }[];
+    anilistData?: IAniListData;
+  }[];
+
+  servers: {
+    id: string;
+    uuid: string;
+    name: string;
+    secret: string;
+  }[];
 }
 
 export interface IUserVariables {

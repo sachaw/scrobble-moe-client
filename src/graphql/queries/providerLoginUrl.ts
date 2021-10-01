@@ -1,12 +1,12 @@
 import { gql } from 'urql';
 
 export interface IProviderLoginUrlResponse {
-  providerLoginUrl: [
-    {
-      provider: string;
-      url: string;
-    }
-  ];
+  providerLoginUrl: IProviderLoginUrl[];
+}
+
+export interface IProviderLoginUrl {
+  provider: string;
+  url: string;
 }
 
 export interface IProviderLoginUrlVariables {
