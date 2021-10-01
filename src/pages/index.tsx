@@ -28,7 +28,7 @@ const Home = (): JSX.Element => {
     <Box mb={8} w="full">
       {useBreakpointValue({
         base: (
-          <Card mx="8">
+          <Card title="temp">
             <Heading size="md">
               Automatically scrobble plex watches to the providers of your
               choice
