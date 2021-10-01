@@ -20,7 +20,7 @@ export const LoginButton = (): JSX.Element => {
     );
   }
 
-  return authCheck.data?.authCheck ? (
+  return authCheck.data?.authCheck.authenticated ? (
     <Button as="a" href="/dashboard" leftIcon={<FiHome />}>
       Dashboard
     </Button>
