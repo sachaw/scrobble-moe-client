@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { Button } from 'components/Button';
 import { IProviderLoginUrl } from 'graphql/queries/providerLoginUrl';
 import { IUser } from 'graphql/queries/user';
 import Image from 'next/image';
-import { FiXCircle } from 'react-icons/fi';
+import { FiLink, FiXCircle } from 'react-icons/fi';
 
 export interface UserCardProps {
   user: IUser;
@@ -18,43 +19,45 @@ export const UserCard = ({
 }: UserCardProps): JSX.Element => {
   return (
     <div className="flex space-x-4 bg-gray-100 rounded-lg p-2 select-none">
-      <Image
-        width="64"
-        height="64"
-        className="rounded-full bg-secondaryBg"
-        src={user.thumb}
-      />
+      <div className="my-auto">
+        <Image
+          width="64"
+          height="64"
+          className="rounded-full bg-secondaryBg"
+          src={user.thumb}
+        />
+      </div>
       <div className="flex flex-col">
         <h1 className="my-auto text-2xl">{user.username}</h1>
         <div className="flex my-auto space-x-2">
           {unlinkedAccounts.map((account, index) => (
-            <div
+            <Button
               key={index}
-              className="flex bg-secondaryBg rounded-lg py-1 px-2 space-x-1 hover:bg-background"
+              rightIcon={
+                <a
+                  href={
+                    providerLoginUrls.find(
+                      (providerLoginUrl) =>
+                        providerLoginUrl.provider === account
+                    )?.url ?? ""
+                  }
+                >
+                  <div className="sr-only">Link {account}</div>
+                  <FiLink />
+                </a>
+              }
             >
               <Image
                 className="my-auto"
                 width="22"
                 height="22"
-                src={account === "anilist" ? "/anilist.svg" : "/kitsu.svg"}
+                src={account === "ANILIST" ? "/anilist.svg" : "/kitsu.svg"}
               />
-              <a
-                href={
-                  providerLoginUrls.find(
-                    (providerLoginUrl) => providerLoginUrl.provider === account
-                  )?.url
-                }
-                className="underline hover:text-pink-600"
-              >
-                Link
-              </a>
-            </div>
+              <p>Unlinked</p>
+            </Button>
           ))}
-          {user.accounts.map((account, index) => (
-            <div
-              key={index}
-              className="flex bg-secondaryBg rounded-lg py-1 px-2 cursor-pointer space-x-1 hover:bg-background"
-            >
+          {user.accounts.map((account) => (
+            <Button key={account.id} rightIcon={<FiXCircle />}>
               <Image
                 className="my-auto"
                 width="22"
@@ -64,8 +67,7 @@ export const UserCard = ({
                 }
               />
               <p>{account.accountId}</p>
-              <FiXCircle className="my-auto" />
-            </div>
+            </Button>
           ))}
         </div>
       </div>

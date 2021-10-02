@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import {
   ILinkServerResponse,
@@ -11,8 +12,6 @@ import {
   PLEX_ACCOUNT_SERVERS,
 } from 'graphql/queries/plexAccountServers';
 import { useMutation, useQuery } from 'urql';
-
-import { Button, Flex } from '@chakra-ui/react';
 
 const AddServer = (): JSX.Element => {
   const [linkedServer, getLinkedServer] = useMutation<
@@ -59,19 +58,12 @@ const AddServer = (): JSX.Element => {
           {plexAccountServers.data &&
             plexAccountServers.data.getPlexAccountServers.map((server) => (
               <Card key={server.machineIdentifier} title="link">
-                <Flex justify="space-between">
+                <div className="flex justify-between">
                   <div>{server.name}</div>
                   {serversLinking ? (
-                    <Button disabled variant="outline" marginTop={4} size="sm">
-                      Linking...
-                    </Button>
+                    <Button>Linking...</Button>
                   ) : (
                     <Button
-                      cursor="pointer"
-                      my="auto"
-                      px="10"
-                      as="a"
-                      size="sm"
                       onClick={(): void => {
                         linkServer(server.machineIdentifier);
                       }}
@@ -79,7 +71,7 @@ const AddServer = (): JSX.Element => {
                       Link Server
                     </Button>
                   )}
-                </Flex>
+                </div>
               </Card>
             ))}
         </div>

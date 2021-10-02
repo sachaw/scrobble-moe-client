@@ -25,10 +25,12 @@ export const ServersGroup = (): JSX.Element => {
   });
 
   return (
-    <div>
-      <Link passHref href="/addServer">
-        <Button text="Add server" />
-      </Link>
+    <div className="flex flex-col space-y-4">
+      <div className="ml-auto">
+        <Link passHref href="/addServer">
+          <Button>Add server</Button>
+        </Link>
+      </div>
       {servers.data && (
         <div>
           {servers.data.servers.map((server) => (

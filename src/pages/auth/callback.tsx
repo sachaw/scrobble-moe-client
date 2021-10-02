@@ -3,8 +3,6 @@ import React from 'react';
 import { Card } from 'components/Card';
 import { plexOauth } from 'util/plex';
 
-import { Box, Heading, Text } from '@chakra-ui/react';
-
 import Token from './steps/token';
 
 const Callback = (): JSX.Element => {
@@ -42,12 +40,8 @@ const Callback = (): JSX.Element => {
 
   return (
     <Card title="Sign in with Plex">
-      {error && (
-        <Box color="red.500" marginTop={2}>
-          <Text>{error}</Text>
-        </Box>
-      )}
-      {!plexToken && <Heading>Checking plex pin.</Heading>}
+      {error && <div color="red.500">{error}</div>}
+      {!plexToken && <div>Checking plex pin.</div>}
 
       {plexToken && <Token plexToken={plexToken} setError={setError} />}
     </Card>

@@ -1,4 +1,4 @@
-import '@fontsource/lexend/latin.css';
+import 'inter-ui/inter.css';
 import 'tailwindcss/tailwind.css';
 
 import React from 'react';
@@ -6,10 +6,8 @@ import React from 'react';
 import { Layout } from 'components/layout';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
-import { customTheme } from 'styles/customTheme';
 import { createClient, defaultExchanges, Provider } from 'urql';
 
-import { ChakraProvider } from '@chakra-ui/react';
 import { devtoolsExchange } from '@urql/devtools';
 
 import defaultSEOConfig from '../../next-seo.config';
@@ -25,12 +23,10 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
   return (
     <Provider value={client}>
-      <ChakraProvider theme={customTheme}>
-        <DefaultSeo {...defaultSEOConfig} />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ChakraProvider>
+      <DefaultSeo {...defaultSEOConfig} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </Provider>
   );
 };

@@ -1,15 +1,16 @@
 import React from 'react';
 
+import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import {
   IWebauthnResponse,
   IWebauthnVariables,
   WEBAUTHN,
 } from 'graphql/mutations/webauthn';
+import Link from 'next/link';
 import { encode } from 'universal-base64';
 import { useMutation } from 'urql';
 
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import {
   startAuthentication,
   startRegistration,
@@ -102,23 +103,19 @@ const WebAuthn = ({
   return (
     <Card title="temp">
       {!webauthn.data && (
-        <Flex justify="space-between">
-          <Text my="auto">Started Webauthn</Text>
-          <Button marginTop={2} onClick={handleWebAuthn}>
-            Retry
-          </Button>
-        </Flex>
+        <div className="flex justify-between">
+          <div>Started Webauthn</div>
+          <Button onClick={handleWebAuthn}>Retry</Button>
+        </div>
       )}
 
       {webauthn.data && (
         <>
-          <Box color="green.500" marginTop={2}>
-            Success!
-          </Box>
+          <div color="green.500">Success!</div>
 
-          <Button as="a" href="/dashboard" variant="outline" marginTop={4}>
-            Go to Dashboard
-          </Button>
+          <Link passHref href="/dashboard">
+            <Button>Go to Dashboard</Button>
+          </Link>
         </>
       )}
     </Card>

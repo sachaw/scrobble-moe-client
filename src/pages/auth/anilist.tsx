@@ -1,14 +1,14 @@
 import React from 'react';
 
+import { Button } from 'components/Button';
 import {
   ADD_LINKED_ACCOUNT,
   IAddLinkedAccountResponse,
   IAddLinkedAccountVariables,
 } from 'graphql/mutations/addLinkAccount';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMutation } from 'urql';
-
-import { Box, Button, Code, Heading } from '@chakra-ui/react';
 
 const AniList = (): JSX.Element => {
   const router = useRouter();
@@ -29,42 +29,30 @@ const AniList = (): JSX.Element => {
   }, [router.query.code, addLinkedAccount]);
 
   return (
-    <>
-      <Box
-        bg="gray.700"
-        py="8"
-        px={{ base: "4", md: "10" }}
-        shadow="base"
-        rounded={{ sm: "lg" }}
-      >
-        <Heading textAlign="center">Link your AniList account.</Heading>
+    <div>
+      <div>Link your AniList account.</div>
 
-        <Box textAlign="center" marginTop={4}>
-          <Code overflowWrap="anywhere">{router.query.code}</Code>
-          {linkedAccount.error && (
-            <>
-              <Box color="red.500" marginTop={2}>
-                {linkedAccount.error.message}
-              </Box>
-              <Button as="a" href="/dashboard" variant="outline" marginTop={4}>
-                Go to Dashboard
-              </Button>
-            </>
-          )}
-          {linkedAccount.data && (
-            <>
-              <Box color="green.500" marginTop={2}>
-                Success!
-              </Box>
+      <div>
+        <div>{router.query.code}</div>
+        {linkedAccount.error && (
+          <>
+            <div>{linkedAccount.error.message}</div>
+            <Link passHref href="/dashboard">
+              <Button>Go to Dashboard</Button>
+            </Link>
+          </>
+        )}
+        {linkedAccount.data && (
+          <>
+            <div>Success!</div>
 
-              <Button as="a" href="/dashboard" variant="outline" marginTop={4}>
-                Go to Dashboard
-              </Button>
-            </>
-          )}
-        </Box>
-      </Box>
-    </>
+            <Link passHref href="/dashboard">
+              <Button>Go to Dashboard</Button>
+            </Link>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

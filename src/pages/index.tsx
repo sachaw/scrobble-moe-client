@@ -1,22 +1,10 @@
 import React from 'react';
 
-import { Card } from 'components/Card';
 import {
   ILatestScrobblesResponse,
   LATEST_SCROBBLES,
 } from 'graphql/queries/latestScrobbles';
 import { useQuery } from 'urql';
-
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  Image,
-  Progress,
-  Skeleton,
-  useBreakpointValue,
-} from '@chakra-ui/react';
 
 const Home = (): JSX.Element => {
   const [latestScrobbles, refetchLatestScrobbles] =
@@ -25,8 +13,8 @@ const Home = (): JSX.Element => {
     });
 
   return (
-    <Box mb={8} w="full">
-      {useBreakpointValue({
+    <div>
+      {/* {useBreakpointValue({
         base: (
           <Card title="temp">
             <Heading size="md">
@@ -126,9 +114,9 @@ const Home = (): JSX.Element => {
             </Flex>
           </Box>
         ),
-      })}
+      })} */}
 
-      <Box m="8">
+      {/* <Box m="8">
         <Center>
           <Flex
             w="full"
@@ -227,7 +215,8 @@ const Home = (): JSX.Element => {
           </Flex>
         </Center>
       </Box>
-    </Box>
+    </Box> */}
+    </div>
   );
 };
 

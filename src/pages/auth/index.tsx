@@ -1,10 +1,9 @@
 import React from 'react';
 
+import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import Link from 'next/link';
 import { plexOauth } from 'util/plex';
-
-import { Button } from '@chakra-ui/react';
 
 const Auth = (): JSX.Element => {
   const [plexUrl, setPlexUrl] = React.useState<string>();
@@ -24,10 +23,10 @@ const Auth = (): JSX.Element => {
       <div>
         {plexUrl ? (
           <Link href={plexUrl} passHref>
-            <Button backgroundColor="orange.400">Sign In</Button>
+            <Button>Sign In</Button>
           </Link>
         ) : (
-          <Button backgroundColor="orange.500">Loading</Button>
+          <Button>Loading</Button>
         )}
       </div>
     </Card>

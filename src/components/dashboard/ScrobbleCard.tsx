@@ -23,7 +23,7 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
       <div className="flex w-full justify-between">
         <div>
           <div className="flex text-gray-600">
-            <small className="flex my-auto mr-1">Success</small>
+            <small className="flex my-auto mr-1 text-sm ">Success</small>
             {scrobble.accounts.map((account, index) => (
               <Image
                 className="my-auto"
@@ -36,16 +36,16 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
               />
             ))}
           </div>
-          <div>
-            <p>{scrobble.anilistData?.title ?? "Unknown"}</p>
+          <div className="text-sm">
+            {scrobble.anilistData?.title ?? "Unknown"}
           </div>
         </div>
         <div>Episode {scrobble.episode}</div>
         <div className="flex">
-          <small className="text-gray-600 my-auto mr-2">
+          <small className="text-gray-600 my-auto font-medium text-xs">
             {new Date(scrobble.updatedAt).toLocaleString()}
           </small>
-          <FiMoreVertical className="my-auto hover:text-gray-600 text-lg cursor-pointer" />
+          <FiMoreVertical className="my-auto hover:text-gray-600 ml-2 text-lg cursor-pointer" />
         </div>
       </div>
       <Dialog

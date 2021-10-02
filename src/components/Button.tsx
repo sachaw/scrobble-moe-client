@@ -1,13 +1,29 @@
 import React from 'react';
 
-export interface ButtonProps {
-  text: string;
+type DefaulDivProps = JSX.IntrinsicElements["div"];
+
+export interface ButtonProps extends DefaulDivProps {
+  type?: "primary" | "secondary";
+  rightIcon?: React.ReactNode;
 }
 
-export const Button = ({ text }: ButtonProps): JSX.Element => {
+export const Button = ({
+  type,
+  rightIcon,
+  children,
+  ...props
+}: ButtonProps): JSX.Element => {
   return (
-    <div className="flex w-20 h-8 bg-secondaryBg hover:bg-background rounded-md cursor-pointer  active:scale-95">
-      <div className="m-auto">{text}</div>
+    <div
+      className="flex bg-secondaryBg hover:bg-background rounded-md cursor-pointer active:scale-95"
+      {...props}
+    >
+      <div className="flex px-4 py-2 space-x-2">{children}</div>
+      {rightIcon && (
+        <div className="flex bg-gray-200 rounded-r-md">
+          <div className="my-auto mx-2">{rightIcon}</div>
+        </div>
+      )}
     </div>
   );
 };

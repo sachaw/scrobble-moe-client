@@ -20,13 +20,13 @@ export const LoginButton = (): JSX.Element => {
 
   return authCheck.data?.authCheck.authenticated ? (
     <Link passHref href="/dashboard">
-      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer">
+      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer active:scale-95">
         <FiHome />
       </div>
     </Link>
   ) : (
     <Link passHref href="/auth">
-      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer">
+      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer active:scale-95">
         <FiLogIn />
       </div>
     </Link>

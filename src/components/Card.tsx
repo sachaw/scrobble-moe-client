@@ -10,13 +10,11 @@ export interface CardProps extends DefaulDivProps {
     title: string;
     component: () => JSX.Element;
   }[];
-  controlls?: () => JSX.Element;
 }
 
 export const Card = ({
   title,
   tabs,
-  controlls,
   children,
   className,
   ...props
@@ -27,7 +25,7 @@ export const Card = ({
       className={`rounded-xl border relative border-gray-200 bg-secondaryBg ${className}`}
     >
       <div className={`p-8 pb-4 ${tabs ? "" : "border-b"}`}>
-        <h1 className="text-xl">{title}</h1>
+        <h1 className="text-xl font-bold">{title}</h1>
       </div>
 
       {tabs && (
@@ -37,11 +35,11 @@ export const Card = ({
               <Tab
                 key={index}
                 className={({ selected }): string =>
-                  `${
+                  `border-b-2 pb-2 cursor-pointer ${
                     selected
                       ? "border-foreground"
                       : "border-secondaryBg text-gray-500 hover:text-foreground"
-                  } border-b-2 pb-2  cursor-pointer`
+                  }`
                 }
               >
                 {tab.title}

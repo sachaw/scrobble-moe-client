@@ -2,11 +2,12 @@ import React from 'react';
 
 import { IServer } from 'graphql/queries/servers';
 import Image from 'next/image';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiActivity, FiChevronUp, FiTrash } from 'react-icons/fi';
 
 import { Disclosure } from '@headlessui/react';
 
 import { Button } from '../Button';
+import { Input } from '../Input';
 
 export interface ServerCardProps {
   server: IServer;
@@ -15,13 +16,13 @@ export interface ServerCardProps {
 export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
   return (
     <Disclosure>
-      {({ open }) => (
-        <>
-          <Disclosure.Button
-            className={`w-full bg-gray-100 rounded-lg p-4 select-none hover:border-gray-200 border ${
-              open ? "border-gray-200" : "border-gray-100"
-            }`}
-          >
+      {({ open }): JSX.Element => (
+        <div
+          className={`flex flex-col w-full bg-gray-100 rounded-lg p-4 select-none hover:border-gray-200 border ${
+            open ? "border-gray-200" : "border-gray-100"
+          }`}
+        >
+          <Disclosure.Button className="w-full">
             <div className="flex space-x-4 w-full justify-between">
               <div className="flex space-x-2">
                 <Image src="/plex.svg" width="45" height="45" />
@@ -33,37 +34,30 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
                 </div>
               </div>
 
-              <FiArrowRight
+              <FiChevronUp
                 className={`my-auto text-xl ${
-                  open ? "transform rotate-90" : ""
+                  open ? "transform rotate-180" : ""
                 }`}
               />
             </div>
-            <Disclosure.Panel className="pt-4">
-              <div className="float-right flex space-x-2">
-                <Button text="Action" />
-                <Button text="Delete" />
-              </div>
-              <div></div>
-            </Disclosure.Panel>
           </Disclosure.Button>
-        </>
+
+          <Disclosure.Panel className="flex flex-col space-y-4 mt-4">
+            <hr />
+            <div className="ml-auto flex space-x-2">
+              <Button rightIcon={<FiActivity />}>Action</Button>
+              <Button rightIcon={<FiTrash />}>Delete</Button>
+            </div>
+            <Input
+              disabled
+              value={`https://webhook.scrobble.moe/api/${server.secret}`}
+            />
+          </Disclosure.Panel>
+        </div>
       )}
     </Disclosure>
   );
 };
-
-{
-  /* <Input
-                w="16rem"
-                value={`https://webhook.scrobble.moe/api/${server.secret}`}
-                isReadOnly
-                placeholder="Welcome"
-              />
-              <Button ml={2}>
-                <FiClipboard />
-              </Button> */
-}
 
 export const ServerCardSkeleton = (): JSX.Element => {
   return <div className="flex bg-gray-100 rounded-lg h-20 w-full"></div>;

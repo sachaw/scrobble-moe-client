@@ -5,10 +5,9 @@ import {
   IAuthenticateResponse,
   IAuthenticateVariables,
 } from 'graphql/mutations/authenticate';
+import Image from 'next/image';
 import { decode } from 'universal-base64';
 import { useMutation } from 'urql';
-
-import { Box, Flex, Heading, Image } from '@chakra-ui/react';
 
 import WebAuthn, { IWebAuthnOptionsType } from './webAuthn';
 
@@ -36,19 +35,11 @@ const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
   }, [webAuthnOptions.error, setError]);
 
   return (
-    <Box textAlign="center" marginTop={4}>
-      <Flex direction="row" mb="2rem">
-        <Image
-          h="4rem"
-          w="4rem"
-          mr="2rem"
-          src={webAuthnOptions.data?.authenticate.plexUser.avatar}
-          rounded="full"
-        />
-        <Heading as="h5" my="auto">
-          {webAuthnOptions.data?.authenticate.plexUser.username}
-        </Heading>
-      </Flex>
+    <div>
+      <div className="flex">
+        <Image src={webAuthnOptions.data?.authenticate.plexUser.avatar ?? ""} />
+        <div>{webAuthnOptions.data?.authenticate.plexUser.username}</div>
+      </div>
       {webAuthnOptions.data && (
         <WebAuthn
           plexToken={plexToken}
@@ -61,7 +52,7 @@ const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
           setError={setError}
         />
       )}
-    </Box>
+    </div>
   );
 };
 
