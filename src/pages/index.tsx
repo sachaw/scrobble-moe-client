@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 import {
   ILatestScrobblesResponse,
   LATEST_SCROBBLES,
-} from 'graphql/queries/latestScrobbles';
-import { useQuery } from 'urql';
+} from "graphql/queries/latestScrobbles";
+import { useQuery } from "urql";
 
 const Home = (): JSX.Element => {
   const [latestScrobbles, refetchLatestScrobbles] =
@@ -13,7 +13,23 @@ const Home = (): JSX.Element => {
     });
 
   return (
-    <div>
+    <div className="mt-52">
+      <h1 className="text-3xl font-semibold">
+        Automatic Plex tracking for{" "}
+        <a
+          className="text-5xl font-bold text-pink-400 underline"
+          href="https://anilist.co/"
+        >
+          AniList
+        </a>{" "}
+        &{" "}
+        <a
+          className="text-5xl font-bold text-pink-400 underline"
+          href="https://kitsu.io/"
+        >
+          Kitsu
+        </a>
+      </h1>
       {/* {useBreakpointValue({
         base: (
           <Card title="temp">

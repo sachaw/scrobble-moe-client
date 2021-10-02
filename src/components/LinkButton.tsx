@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import Link from 'next/link';
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export interface LinkButtonProps {
   href: string;
@@ -13,13 +14,13 @@ export const LinkButton = ({
   href,
   icon,
   text,
-  active,
 }: LinkButtonProps): JSX.Element => {
+  const router = useRouter();
   return (
     <Link passHref href={href}>
       <a
         className={`px-3 relative flex items-center py-2 rounded-md  hover:bg-gray-100 space-x-4 hover:text-foreground focus-visible:ring-pink-700 focus-visible:ring-2 focus-visible:outline-none ${
-          active ? "text-foreground" : "text-gray-500"
+          router.asPath === href ? "text-foreground" : "text-gray-500"
         }`}
       >
         {icon}

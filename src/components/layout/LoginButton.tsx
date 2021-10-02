@@ -6,7 +6,7 @@ import { FiHome, FiLoader, FiLogIn } from "react-icons/fi";
 import { useQuery } from "urql";
 
 export const LoginButton = (): JSX.Element => {
-  const [authCheck, refetchAuthCheck] = useQuery<IAuthCheckResponse>({
+  const [authCheck] = useQuery<IAuthCheckResponse>({
     query: AUTH_CHECK,
   });
 

@@ -1,6 +1,6 @@
-import { gql } from 'urql';
+import { gql } from "urql";
 
-import { IAniListData } from './latestScrobbles';
+import { IAniListData } from "./latestScrobbles";
 
 export interface IScrobblesResponse {
   scrobbles: IScrobble[];
@@ -25,6 +25,9 @@ export interface IScrobble {
 export interface IScrobblesVariables {
   Input: {
     take: number;
+    orderBy?: {
+      updatedAt: "asc" | "desc";
+    };
   };
 }
 

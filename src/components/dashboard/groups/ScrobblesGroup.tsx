@@ -22,6 +22,9 @@ export const ScrobblesGroup = (): JSX.Element => {
     variables: {
       Input: {
         take: 5,
+        orderBy: {
+          updatedAt: "desc",
+        },
       },
     },
   });
