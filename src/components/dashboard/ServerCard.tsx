@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { IServer } from 'graphql/queries/servers';
-import Image from 'next/image';
-import { FiActivity, FiChevronDown, FiTrash } from 'react-icons/fi';
+import { IServer } from "graphql/queries/servers";
+import Image from "next/image";
+import { FiActivity, FiChevronDown, FiTrash } from "react-icons/fi";
 
-import { Disclosure } from '@headlessui/react';
+import { Disclosure } from "@headlessui/react";
 
-import { Button } from '../Button';
-import { Input } from '../Input';
+import { Button } from "../Button";
+import { Input } from "../Input";
 
 export interface ServerCardProps {
   server: IServer;
@@ -23,12 +23,12 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
           }`}
         >
           <Disclosure.Button className="w-full">
-            <div className="flex space-x-4 w-full justify-between">
+            <div className="flex justify-between w-full space-x-4">
               <div className="flex space-x-2">
                 <Image src="/plex.svg" width="45" height="45" />
                 <div className="flex flex-col">
                   <div className="mr-auto text-lg">{server.name}</div>
-                  <div className="mr-auto text-sm font-light text-gray-600 truncate w-32">
+                  <div className="w-32 mr-auto text-sm font-light text-gray-600 truncate">
                     {server.uuid}
                   </div>
                 </div>
@@ -42,15 +42,15 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
             </div>
           </Disclosure.Button>
 
-          <Disclosure.Panel className="flex flex-col space-y-4 mt-4">
+          <Disclosure.Panel className="flex flex-col mt-4 space-y-4">
             <hr />
-            <div className="ml-auto flex space-x-2">
+            <div className="flex ml-auto space-x-2">
               <Button rightIcon={<FiActivity />}>Action</Button>
               <Button rightIcon={<FiTrash />}>Delete</Button>
             </div>
             <Input
               disabled
-              value={`https://webhook.scrobble.moe/api/${server.secret}`}
+              value={`https://webhook.scrobble.moe/${server.secret}`}
             />
           </Disclosure.Panel>
         </div>
@@ -60,5 +60,5 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
 };
 
 export const ServerCardSkeleton = (): JSX.Element => {
-  return <div className="flex bg-gray-100 rounded-lg h-20 w-full"></div>;
+  return <div className="flex w-full h-20 bg-gray-100 rounded-lg"></div>;
 };

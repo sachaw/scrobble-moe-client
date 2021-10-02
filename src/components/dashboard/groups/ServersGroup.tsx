@@ -53,7 +53,7 @@ export const ServersGroup = (): JSX.Element => {
       <div className="flex flex-col h-full">
         {servers.fetching && <CardLoading />}
         {servers.data && !servers.fetching && (
-          <div>
+          <div className="space-y-2">
             {servers.data.servers.map((server) => (
               <ServerCard key={server.id} server={server} />
             ))}

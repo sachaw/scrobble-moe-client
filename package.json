@@ -19,11 +19,10 @@
     "@headlessui/react": "^1.4.1",
     "@simplewebauthn/browser": "^4.1.0",
     "@simplewebauthn/typescript-types": "^4.0.0",
-    "@urql/devtools": "^2.0.3",
     "@types/busboy": "^0.2.4",
     "@types/react": "^17.0.21",
+    "@urql/devtools": "^2.0.3",
     "autoprefixer": "^10.3.6",
-    "busboy": "^0.3.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.6.0",
     "graphql-request": "^3.5.0",
@@ -39,10 +38,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "universal-base64": "^2.1.0",
-    "urql": "^2.0.5",
     "tailwindcss": "^2.2.16",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "universal-base64": "^2.1.0",
+    "urql": "^2.0.5"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
