@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Button } from "components/Button";
-import { IProviderLoginUrl } from "graphql/queries/providerLoginUrl";
+import { IProviderLoginUrl, Provider } from "graphql/queries/providerLoginUrl";
 import { IUser } from "graphql/queries/user";
 import Image from "next/image";
 import { FiLink, FiXCircle } from "react-icons/fi";
 
 export interface UserCardProps {
   user: IUser;
-  unlinkedAccounts: string[];
+  unlinkedAccounts: Provider[];
   providerLoginUrls: IProviderLoginUrl[];
 }
 

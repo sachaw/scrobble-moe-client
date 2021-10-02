@@ -1,17 +1,19 @@
-import { gql } from 'urql';
+import { gql } from "urql";
 
 export interface IProviderLoginUrlResponse {
   providerLoginUrl: IProviderLoginUrl[];
 }
 
+export type Provider = "KITSU" | "ANILIST";
+
 export interface IProviderLoginUrl {
-  provider: string;
+  provider: Provider;
   url: string;
 }
 
 export interface IProviderLoginUrlVariables {
   Input: {
-    providers: string[];
+    providers: Provider[];
   };
 }
 

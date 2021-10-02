@@ -6,6 +6,7 @@ import { TabLayout } from "components/TabLayout";
 import {
   IProviderLoginUrlResponse,
   IProviderLoginUrlVariables,
+  Provider,
   PROVIDER_LOGIN_URLS,
 } from "graphql/queries/providerLoginUrl";
 import { IUserResponse, IUserVariables, USER } from "graphql/queries/user";
@@ -15,9 +16,11 @@ import { useQuery } from "urql";
 import { UserCard } from "../UserCard";
 
 export const OverviewGroup = (): JSX.Element => {
-  const [unlinkedAccounts, setUnlinkedAccounts] = React.useState<string[]>([]);
+  const [unlinkedAccounts, setUnlinkedAccounts] = React.useState<Provider[]>(
+    []
+  );
 
-  const [linkableAccounts] = React.useState(["ANILIST", "KITSU"]);
+  const [linkableAccounts] = React.useState<Provider[]>(["ANILIST", "KITSU"]);
 
   const [usersData, refetchUsersData] = useQuery<IUserResponse, IUserVariables>(
     {
@@ -46,13 +49,14 @@ export const OverviewGroup = (): JSX.Element => {
     const userAccounts =
       usersData?.data?.users[0]?.accounts.map((account) => account.provider) ??
       [];
-
-    setUnlinkedAccounts(
-      linkableAccounts
-        .map((account) => (userAccounts.includes(account) ? "" : account))
-        .filter((acc) => acc)
-    );
-  }, [linkableAccounts, usersData.data]);
+    if (!unlinkedAccounts.length) {
+      for (const account of linkableAccounts) {
+        if (userAccounts.includes(account)) {
+          setUnlinkedAccounts([...unlinkedAccounts, account]);
+        }
+      }
+    }
+  }, [linkableAccounts, usersData.data, unlinkedAccounts]);
 
   return (
     <TabLayout

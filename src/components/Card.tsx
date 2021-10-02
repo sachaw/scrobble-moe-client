@@ -29,7 +29,7 @@ export const Card = ({
       </div>
 
       {tabs && (
-        <Tab.Group>
+        <Tab.Group as="div">
           <Tab.List className="flex w-full px-8 space-x-8 border-b">
             {tabs.map((tab, index) => (
               <Tab
@@ -56,7 +56,7 @@ export const Card = ({
         </Tab.Group>
       )}
 
-      {children && <div className="m-8 h-[32rem]">{children}</div>}
+      {children && <div className="my-8 md:m-8 h-[32rem]">{children}</div>}
     </div>
   );
 };
