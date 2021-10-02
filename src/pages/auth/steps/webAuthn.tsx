@@ -1,26 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from 'components/Button';
-import { Card } from 'components/Card';
+import { Button } from "components/Button";
 import {
   IWebauthnResponse,
   IWebauthnVariables,
   WEBAUTHN,
-} from 'graphql/mutations/webauthn';
-import Link from 'next/link';
-import { encode } from 'universal-base64';
-import { useMutation } from 'urql';
+} from "graphql/mutations/webauthn";
+import Link from "next/link";
+import { encode } from "universal-base64";
+import { useMutation } from "urql";
 
 import {
   startAuthentication,
   startRegistration,
-} from '@simplewebauthn/browser';
+} from "@simplewebauthn/browser";
 import {
   AuthenticationCredentialJSON,
   PublicKeyCredentialCreationOptionsJSON,
   PublicKeyCredentialRequestOptionsJSON,
   RegistrationCredentialJSON,
-} from '@simplewebauthn/typescript-types';
+} from "@simplewebauthn/typescript-types";
 
 export type IWebAuthnOptionsType =
   | PublicKeyCredentialCreationOptionsJSON
@@ -101,7 +100,7 @@ const WebAuthn = ({
   }, [webauthn.error, setError]);
 
   return (
-    <Card title="temp">
+    <div>
       {!webauthn.data && (
         <div className="flex justify-between">
           <div>Started Webauthn</div>
@@ -118,7 +117,7 @@ const WebAuthn = ({
           </Link>
         </>
       )}
-    </Card>
+    </div>
   );
 };
 

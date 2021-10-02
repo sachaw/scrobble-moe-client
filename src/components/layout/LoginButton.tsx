@@ -12,7 +12,7 @@ export const LoginButton = (): JSX.Element => {
 
   if (authCheck.fetching) {
     return (
-      <div className="p-4 text-gray-600 bg-gray-100 rounded-full cursor-default">
+      <div className="p-3 text-gray-600 rounded-md cursor-pointer hover:bg-gray-100 active:scale-95">
         <FiLoader className="animate-spin" />
       </div>
     );

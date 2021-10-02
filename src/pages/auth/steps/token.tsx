@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react";
 
+import { CardLoading } from "components/Card";
 import {
   AUTHENTICATE,
   IAuthenticateResponse,
   IAuthenticateVariables,
-} from 'graphql/mutations/authenticate';
-import Image from 'next/image';
-import { decode } from 'universal-base64';
-import { useMutation } from 'urql';
+} from "graphql/mutations/authenticate";
+import Image from "next/image";
+import { decode } from "universal-base64";
+import { useMutation } from "urql";
 
-import WebAuthn, { IWebAuthnOptionsType } from './webAuthn';
+import WebAuthn, { IWebAuthnOptionsType } from "./webAuthn";
 
 interface webAuthnProps {
   plexToken: string;
@@ -36,21 +37,33 @@ const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
 
   return (
     <div>
-      <div className="flex">
-        <Image src={webAuthnOptions.data?.authenticate.plexUser.avatar ?? ""} />
-        <div>{webAuthnOptions.data?.authenticate.plexUser.username}</div>
-      </div>
-      {webAuthnOptions.data && (
-        <WebAuthn
-          plexToken={plexToken}
-          type={webAuthnOptions.data.authenticate.type}
-          options={
-            JSON.parse(
-              decode(webAuthnOptions.data.authenticate.webauthnOptions)
-            ) as IWebAuthnOptionsType
-          }
-          setError={setError}
-        />
+      {webAuthnOptions.fetching && <CardLoading />}
+      {webAuthnOptions.data && !webAuthnOptions.fetching && (
+        <>
+          <div className="flex">
+            <div className="w-16 h-16">
+              <Image
+                src={webAuthnOptions.data?.authenticate.plexUser.avatar ?? ""}
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+            <div>{webAuthnOptions.data?.authenticate.plexUser.username}</div>
+          </div>
+          {webAuthnOptions.data && (
+            <WebAuthn
+              plexToken={plexToken}
+              type={webAuthnOptions.data.authenticate.type}
+              options={
+                JSON.parse(
+                  decode(webAuthnOptions.data.authenticate.webauthnOptions)
+                ) as IWebAuthnOptionsType
+              }
+              setError={setError}
+            />
+          )}
+        </>
       )}
     </div>
   );
