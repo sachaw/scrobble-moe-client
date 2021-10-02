@@ -1,17 +1,25 @@
 import React from 'react';
 
-export interface IconButtonProps {
+type DefaulButtonProps = JSX.IntrinsicElements["button"];
+
+export interface IconButtonProps extends DefaulButtonProps {
   icon: React.ReactNode;
 }
 
-export const IconButton = ({ icon }: IconButtonProps): JSX.Element => {
+export const IconButton = ({
+  icon,
+  ...props
+}: IconButtonProps): JSX.Element => {
   return (
-    <button
-      type="button"
-      className="p-2 rounded-md hover:bg-gray-100 active:scale-95"
-    >
-      {icon}
-      <span className="sr-only">Refresh</span>
-    </button>
+    <div className="my-auto">
+      <button
+        type="button"
+        className="p-2 rounded-md bg-gray-100 hover:bg-background active:scale-95"
+        {...props}
+      >
+        {icon}
+        <span className="sr-only">Refresh</span>
+      </button>
+    </div>
   );
 };

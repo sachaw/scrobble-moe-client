@@ -27,7 +27,7 @@ export const ScrobblesGroup = (): JSX.Element => {
   return (
     <div className="flex flex-col space-y-2">
       <div
-        className="-mt-4 mb-4 ml-auto"
+        className="-mt-4 mb-4 ml-auto mr-4 md:mr-auto"
         onClick={(): void => {
           refetchScrobbles({
             requestPolicy: "network-only",

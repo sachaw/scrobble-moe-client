@@ -48,7 +48,7 @@ export const Card = ({
           </Tab.List>
           <Tab.Panels>
             {tabs.map((tab, index) => (
-              <Tab.Panel key={index} className="m-8">
+              <Tab.Panel key={index} className="md:m-8 my-8">
                 <tab.component />
               </Tab.Panel>
             ))}

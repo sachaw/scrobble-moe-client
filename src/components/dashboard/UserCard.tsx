@@ -18,7 +18,7 @@ export const UserCard = ({
   providerLoginUrls,
 }: UserCardProps): JSX.Element => {
   return (
-    <div className="flex space-x-4 bg-gray-100 rounded-lg p-2 select-none">
+    <div className="flex space-x-4 bg-gray-100 md:rounded-lg p-2 select-none">
       <div className="my-auto">
         <Image
           width="64"
@@ -49,8 +49,8 @@ export const UserCard = ({
             >
               <Image
                 className="my-auto"
-                width="22"
-                height="22"
+                width="16"
+                height="16"
                 src={account === "ANILIST" ? "/anilist.svg" : "/kitsu.svg"}
               />
               <p>Unlinked</p>
@@ -60,8 +60,8 @@ export const UserCard = ({
             <Button key={account.id} rightIcon={<FiXCircle />}>
               <Image
                 className="my-auto"
-                width="22"
-                height="22"
+                width="16"
+                height="16"
                 src={
                   account.provider === "ANILIST" ? "/anilist.svg" : "/kitsu.svg"
                 }

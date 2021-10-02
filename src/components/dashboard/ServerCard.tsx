@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IServer } from 'graphql/queries/servers';
 import Image from 'next/image';
-import { FiActivity, FiChevronUp, FiTrash } from 'react-icons/fi';
+import { FiActivity, FiChevronDown, FiTrash } from 'react-icons/fi';
 
 import { Disclosure } from '@headlessui/react';
 
@@ -18,7 +18,7 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
     <Disclosure>
       {({ open }): JSX.Element => (
         <div
-          className={`flex flex-col w-full bg-gray-100 rounded-lg p-4 select-none hover:border-gray-200 border ${
+          className={`flex flex-col w-full bg-gray-100 md:rounded-lg p-4 select-none hover:border-gray-200 md:border ${
             open ? "border-gray-200" : "border-gray-100"
           }`}
         >
@@ -34,7 +34,7 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
                 </div>
               </div>
 
-              <FiChevronUp
+              <FiChevronDown
                 className={`my-auto text-xl ${
                   open ? "transform rotate-180" : ""
                 }`}
