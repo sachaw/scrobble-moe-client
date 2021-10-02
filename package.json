@@ -31,6 +31,7 @@
     "next": "^11.1.2",
     "next-pwa": "^5.3.1",
     "next-seo": "^4.26.0",
+    "next-sitemap": "^1.6.164",
     "next-transpile-modules": "^8.0.0",
     "plex-oauth": "^2.0.1",
     "postcss": "^8.3.8",
@@ -59,7 +60,6 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "lint-staged": "^11.1.2",
-    "next-sitemap": "^1.6.164",
     "standard-version": "^9.3.1"
   },
   "optionalDependencies": {
