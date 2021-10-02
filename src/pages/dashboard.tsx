@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Card } from 'components/Card';
-import { OverviewGroup } from 'components/dashboard/groups/OverviewGroup';
-import { ScrobblesGroup } from 'components/dashboard/groups/ScrobblesGroup';
-import { ServersGroup } from 'components/dashboard/groups/ServersGroup';
-import { SettingsGroup } from 'components/dashboard/groups/SettingsGroup';
+import { Card } from "components/Card";
+import { OverviewGroup } from "components/dashboard/groups/OverviewGroup";
+import { ScrobblesGroup } from "components/dashboard/groups/ScrobblesGroup";
+import { ServersGroup } from "components/dashboard/groups/ServersGroup";
+import { SettingsGroup } from "components/dashboard/groups/SettingsGroup";
 
 const Dashboard = (): JSX.Element => {
   return (

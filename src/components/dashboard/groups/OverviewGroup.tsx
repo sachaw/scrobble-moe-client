@@ -1,22 +1,23 @@
-import React from 'react';
+import React from "react";
 
+import { CardLoading } from "components/Card";
+import { IconButton } from "components/IconButton";
+import { TabLayout } from "components/TabLayout";
 import {
   IProviderLoginUrlResponse,
   IProviderLoginUrlVariables,
   PROVIDER_LOGIN_URLS,
-} from 'graphql/queries/providerLoginUrl';
-import { IUserResponse, IUserVariables, USER } from 'graphql/queries/user';
-import { useQuery } from 'urql';
+} from "graphql/queries/providerLoginUrl";
+import { IUserResponse, IUserVariables, USER } from "graphql/queries/user";
+import { FiRefreshCw } from "react-icons/fi";
+import { useQuery } from "urql";
 
-import { UserCard, UserCardSkeleton } from '../UserCard';
+import { UserCard } from "../UserCard";
 
 export const OverviewGroup = (): JSX.Element => {
   const [unlinkedAccounts, setUnlinkedAccounts] = React.useState<string[]>([]);
 
-  const [linkableAccounts, refetchLinkableAccounts] = React.useState([
-    "ANILIST",
-    "KITSU",
-  ]);
+  const [linkableAccounts] = React.useState(["ANILIST", "KITSU"]);
 
   const [usersData, refetchUsersData] = useQuery<IUserResponse, IUserVariables>(
     {
@@ -54,17 +55,41 @@ export const OverviewGroup = (): JSX.Element => {
   }, [linkableAccounts, usersData.data]);
 
   return (
-    <div>
-      {providerLoginUrls.fetching ||
-        (usersData.fetching && <UserCardSkeleton />)}
-
-      {providerLoginUrls.data && usersData.data && (
-        <UserCard
-          user={usersData.data.users[0]}
-          unlinkedAccounts={unlinkedAccounts}
-          providerLoginUrls={providerLoginUrls.data.providerLoginUrl}
+    <TabLayout
+      actions={
+        <IconButton
+          onClick={(): void => {
+            refetchProviderLoginUrls({
+              requestPolicy: "network-only",
+            });
+            refetchUsersData({
+              requestPolicy: "network-only",
+            });
+          }}
+          icon={
+            <FiRefreshCw
+              className={
+                providerLoginUrls.fetching || usersData.fetching
+                  ? "animate-spin"
+                  : ""
+              }
+            />
+          }
         />
-      )}
-    </div>
+      }
+    >
+      {providerLoginUrls.fetching || (usersData.fetching && <CardLoading />)}
+
+      {providerLoginUrls.data &&
+        usersData.data &&
+        !providerLoginUrls.fetching &&
+        !usersData.fetching && (
+          <UserCard
+            user={usersData.data.users[0]}
+            unlinkedAccounts={unlinkedAccounts}
+            providerLoginUrls={providerLoginUrls.data.providerLoginUrl}
+          />
+        )}
+    </TabLayout>
   );
 };

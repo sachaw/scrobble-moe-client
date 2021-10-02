@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Tab } from '@headlessui/react';
+import { Tab } from "@headlessui/react";
 
 type DefaulDivProps = JSX.IntrinsicElements["div"];
 
@@ -30,7 +30,7 @@ export const Card = ({
 
       {tabs && (
         <Tab.Group>
-          <Tab.List className="flex w-full border-b space-x-8 px-8">
+          <Tab.List className="flex w-full px-8 space-x-8 border-b">
             {tabs.map((tab, index) => (
               <Tab
                 key={index}
@@ -46,9 +46,9 @@ export const Card = ({
               </Tab>
             ))}
           </Tab.List>
-          <Tab.Panels>
+          <Tab.Panels className="h-[32rem]">
             {tabs.map((tab, index) => (
-              <Tab.Panel key={index} className="md:m-8 my-8">
+              <Tab.Panel key={index} className="h-full my-8 md:m-8 md:pb-8">
                 <tab.component />
               </Tab.Panel>
             ))}
@@ -56,7 +56,13 @@ export const Card = ({
         </Tab.Group>
       )}
 
-      <div className="m-8">{children}</div>
+      {children && <div className="m-8 h-[32rem]">{children}</div>}
     </div>
+  );
+};
+
+export const CardLoading = (): JSX.Element => {
+  return (
+    <div className="w-full h-full rounded-lg bg-background animate-pulse"></div>
   );
 };

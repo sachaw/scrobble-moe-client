@@ -1,18 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { IconButton } from 'components/IconButton';
+import { CardLoading } from "components/Card";
+import { IconButton } from "components/IconButton";
+import { TabLayout } from "components/TabLayout";
 import {
   IScrobblesResponse,
   IScrobblesVariables,
   SCROBBLES,
-} from 'graphql/queries/scrobbles';
-import { FiRefreshCw } from 'react-icons/fi';
-import { useQuery } from 'urql';
+} from "graphql/queries/scrobbles";
+import { FiRefreshCw } from "react-icons/fi";
+import { useQuery } from "urql";
 
-import { ScrobbleCard, ScrobbleCardSkeleton } from '../ScrobbleCard';
+import { ScrobbleCard } from "../ScrobbleCard";
 
 export const ScrobblesGroup = (): JSX.Element => {
-  const [scrobblesData, refetchScrobbles] = useQuery<
+  const [scrobbles, refetchScrobbles] = useQuery<
     IScrobblesResponse,
     IScrobblesVariables
   >({
@@ -25,40 +27,37 @@ export const ScrobblesGroup = (): JSX.Element => {
   });
 
   return (
-    <div className="flex flex-col space-y-2">
-      <div
-        className="-mt-4 mb-4 ml-auto mr-4 md:mr-auto"
-        onClick={(): void => {
-          refetchScrobbles({
-            requestPolicy: "network-only",
-          });
-        }}
-      >
+    <TabLayout
+      actions={
         <IconButton
+          onClick={(): void => {
+            refetchScrobbles({
+              requestPolicy: "network-only",
+            });
+          }}
           icon={
-            <FiRefreshCw
-              className={scrobblesData.fetching ? "animate-spin" : ""}
-            />
+            <FiRefreshCw className={scrobbles.fetching ? "animate-spin" : ""} />
           }
         />
-      </div>
-      {scrobblesData.fetching && <ScrobbleCardSkeleton />}
-      {scrobblesData.data && (
+      }
+    >
+      {scrobbles.fetching && <CardLoading />}
+      {scrobbles.data && !scrobbles.fetching && (
         <div>
-          {scrobblesData.data.scrobbles.length > 0 && (
+          {scrobbles.data.scrobbles.length > 0 && (
             <div className="space-y-2">
-              {scrobblesData.data.scrobbles.map((scrobble) => (
+              {scrobbles.data.scrobbles.map((scrobble) => (
                 <ScrobbleCard key={scrobble.id} scrobble={scrobble} />
               ))}
             </div>
           )}
         </div>
       )}
-      {scrobblesData.data?.scrobbles.length === 0 && (
-        <div className="flex bg-gray-100 rounded-lg h-16 w-full">
-          <div className="text-xl my-auto ml-4">No Scrobbles</div>
+      {scrobbles.data?.scrobbles.length === 0 && (
+        <div className="flex w-full h-16 bg-gray-100 rounded-lg">
+          <div className="my-auto ml-4 text-xl">No Scrobbles</div>
         </div>
       )}
-    </div>
+    </TabLayout>
   );
 };

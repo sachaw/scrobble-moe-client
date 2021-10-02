@@ -1,17 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from 'components/Button';
-import { Card } from 'components/Card';
+import { Button } from "components/Button";
+import { Card, CardLoading } from "components/Card";
+import { IconButton } from "components/IconButton";
+import { TabLayout } from "components/TabLayout";
 import {
   ILinkServerResponse,
   ILinkServerVariables,
   LINK_SERVER,
-} from 'graphql/mutations/linkServer';
+} from "graphql/mutations/linkServer";
 import {
   IPlexAccountServersResponse,
   PLEX_ACCOUNT_SERVERS,
-} from 'graphql/queries/plexAccountServers';
-import { useMutation, useQuery } from 'urql';
+} from "graphql/queries/plexAccountServers";
+import { FiRefreshCw } from "react-icons/fi";
+import { useMutation, useQuery } from "urql";
 
 const AddServer = (): JSX.Element => {
   const [linkedServer, getLinkedServer] = useMutation<
@@ -45,19 +48,27 @@ const AddServer = (): JSX.Element => {
   };
   return (
     <Card title="Link Plex Server">
-      {plexAccountServers.error && (
-        <>
-          <div>Error: {plexAccountServers.error.message}</div>
-          <div>{error}</div>
-        </>
-      )}
-      {plexAccountServers.fetching ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          {plexAccountServers.data &&
-            plexAccountServers.data.getPlexAccountServers.map((server) => (
-              <Card key={server.machineIdentifier} title="link">
+      <TabLayout
+        actions={
+          <IconButton
+            onClick={(): void => {
+              refetchPlexAccountServers({
+                requestPolicy: "network-only",
+              });
+            }}
+            icon={
+              <FiRefreshCw
+                className={plexAccountServers.fetching ? "animate-spin" : ""}
+              />
+            }
+          />
+        }
+      >
+        {plexAccountServers.fetching && <CardLoading />}
+        {plexAccountServers.data && !plexAccountServers.fetching && (
+          <div>
+            {plexAccountServers.data.getPlexAccountServers.map((server) => (
+              <div key={server.machineIdentifier}>
                 <div className="flex justify-between">
                   <div>{server.name}</div>
                   {serversLinking ? (
@@ -72,10 +83,11 @@ const AddServer = (): JSX.Element => {
                     </Button>
                   )}
                 </div>
-              </Card>
+              </div>
             ))}
-        </div>
-      )}
+          </div>
+        )}
+      </TabLayout>
     </Card>
   );
 };

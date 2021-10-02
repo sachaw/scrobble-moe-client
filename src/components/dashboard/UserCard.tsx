@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from 'components/Button';
-import { IProviderLoginUrl } from 'graphql/queries/providerLoginUrl';
-import { IUser } from 'graphql/queries/user';
-import Image from 'next/image';
-import { FiLink, FiXCircle } from 'react-icons/fi';
+import { Button } from "components/Button";
+import { IProviderLoginUrl } from "graphql/queries/providerLoginUrl";
+import { IUser } from "graphql/queries/user";
+import Image from "next/image";
+import { FiLink, FiXCircle } from "react-icons/fi";
 
 export interface UserCardProps {
   user: IUser;
@@ -18,7 +18,7 @@ export const UserCard = ({
   providerLoginUrls,
 }: UserCardProps): JSX.Element => {
   return (
-    <div className="flex space-x-4 bg-gray-100 md:rounded-lg p-2 select-none">
+    <div className="flex p-2 space-x-4 bg-gray-100 select-none md:rounded-lg">
       <div className="my-auto">
         <Image
           width="64"
@@ -72,11 +72,5 @@ export const UserCard = ({
         </div>
       </div>
     </div>
-  );
-};
-
-export const UserCardSkeleton = (): JSX.Element => {
-  return (
-    <div className="bg-gray-100 rounded-lg h-20 w-full animate-pulse"></div>
   );
 };
