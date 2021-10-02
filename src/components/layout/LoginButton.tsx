@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { AUTH_CHECK, IAuthCheckResponse } from 'graphql/queries/authCheck';
-import Link from 'next/link';
-import { FiHome, FiLoader, FiLogIn } from 'react-icons/fi';
-import { useQuery } from 'urql';
+import { AUTH_CHECK, IAuthCheckResponse } from "graphql/queries/authCheck";
+import Link from "next/link";
+import { FiHome, FiLoader, FiLogIn } from "react-icons/fi";
+import { useQuery } from "urql";
 
 export const LoginButton = (): JSX.Element => {
   const [authCheck, refetchAuthCheck] = useQuery<IAuthCheckResponse>({
@@ -12,7 +12,7 @@ export const LoginButton = (): JSX.Element => {
 
   if (authCheck.fetching) {
     return (
-      <div className="bg-gray-100 rounded-full p-4 cursor-default text-gray-600">
+      <div className="p-4 text-gray-600 bg-gray-100 rounded-full cursor-default">
         <FiLoader className="animate-spin" />
       </div>
     );
@@ -20,13 +20,13 @@ export const LoginButton = (): JSX.Element => {
 
   return authCheck.data?.authCheck.authenticated ? (
     <Link passHref href="/dashboard">
-      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer active:scale-95">
+      <div className="p-3 rounded-md cursor-pointer hover:bg-gray-100 active:scale-95">
         <FiHome />
       </div>
     </Link>
   ) : (
     <Link passHref href="/auth">
-      <div className="bg-gray-100 rounded-full p-4 hover:bg-gray-200 cursor-pointer active:scale-95">
+      <div className="p-3 rounded-md cursor-pointer hover:bg-gray-100 active:scale-95">
         <FiLogIn />
       </div>
     </Link>
