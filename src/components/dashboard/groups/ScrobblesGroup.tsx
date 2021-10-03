@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import { CardLoading } from "components/Card";
-import { IconButton } from "components/IconButton";
-import { TabLayout } from "components/TabLayout";
+import { CardLoading, CardNoInfo } from 'components/Card';
+import { IconButton } from 'components/IconButton';
+import { TabLayout } from 'components/TabLayout';
 import {
   IScrobblesResponse,
   IScrobblesVariables,
   SCROBBLES,
-} from "graphql/queries/scrobbles";
-import { FiRefreshCw } from "react-icons/fi";
-import { useQuery } from "urql";
+} from 'graphql/queries/scrobbles';
+import { FiRefreshCw } from 'react-icons/fi';
+import { useQuery } from 'urql';
 
-import { ScrobbleCard } from "../ScrobbleCard";
+import { ScrobbleCard } from '../ScrobbleCard';
 
 export const ScrobblesGroup = (): JSX.Element => {
   const [scrobbles, refetchScrobbles] = useQuery<
@@ -57,9 +57,7 @@ export const ScrobblesGroup = (): JSX.Element => {
         </div>
       )}
       {scrobbles.data?.scrobbles.length === 0 && (
-        <div className="flex w-full h-16 bg-gray-100 rounded-lg">
-          <div className="my-auto ml-4 text-xl">No Scrobbles</div>
-        </div>
+        <CardNoInfo message="No Scrobbles" />
       )}
     </TabLayout>
   );

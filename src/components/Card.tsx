@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { Tab } from "@headlessui/react";
+import { Tab } from '@headlessui/react';
 
 type DefaulDivProps = JSX.IntrinsicElements["div"];
 
@@ -64,5 +64,17 @@ export const Card = ({
 export const CardLoading = (): JSX.Element => {
   return (
     <div className="w-full h-full rounded-lg bg-background animate-pulse"></div>
+  );
+};
+
+export interface CardNoInfoProps {
+  message: string;
+}
+
+export const CardNoInfo = ({ message }: CardNoInfoProps): JSX.Element => {
+  return (
+    <div className="flex w-full h-full rounded-lg bg-background">
+      <div className="m-auto text-4xl font-semibold">{message}</div>
+    </div>
   );
 };

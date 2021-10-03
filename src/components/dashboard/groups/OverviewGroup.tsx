@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { CardLoading } from "components/Card";
-import { IconButton } from "components/IconButton";
-import { TabLayout } from "components/TabLayout";
+import { CardLoading } from 'components/Card';
+import { IconButton } from 'components/IconButton';
+import { TabLayout } from 'components/TabLayout';
 import {
   IProviderLoginUrlResponse,
   IProviderLoginUrlVariables,
   Provider,
   PROVIDER_LOGIN_URLS,
-} from "graphql/queries/providerLoginUrl";
-import { IUserResponse, IUserVariables, USER } from "graphql/queries/user";
-import { FiRefreshCw } from "react-icons/fi";
-import { useQuery } from "urql";
+} from 'graphql/queries/providerLoginUrl';
+import { IUserResponse, IUserVariables, USER } from 'graphql/queries/user';
+import { FiRefreshCw } from 'react-icons/fi';
+import { useQuery } from 'urql';
 
-import { UserCard } from "../UserCard";
+import { UserCard } from '../UserCard';
 
 export const OverviewGroup = (): JSX.Element => {
   const [unlinkedAccounts, setUnlinkedAccounts] = React.useState<Provider[]>(

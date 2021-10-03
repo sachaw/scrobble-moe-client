@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { CardLoading } from "components/Card";
-import { IconButton } from "components/IconButton";
-import { TabLayout } from "components/TabLayout";
+import { CardLoading, CardNoInfo } from 'components/Card';
+import { IconButton } from 'components/IconButton';
+import { TabLayout } from 'components/TabLayout';
 import {
   IServersResponse,
   IServersVariables,
   SERVERS,
-} from "graphql/queries/servers";
-import Link from "next/link";
-import { FiPlus, FiRefreshCw } from "react-icons/fi";
-import { useQuery } from "urql";
+} from 'graphql/queries/servers';
+import Link from 'next/link';
+import { FiPlus, FiRefreshCw } from 'react-icons/fi';
+import { useQuery } from 'urql';
 
-import { Button } from "../../Button";
-import { ServerCard } from "../ServerCard";
+import { Button } from '../../Button';
+import { ServerCard } from '../ServerCard';
 
 export const ServersGroup = (): JSX.Element => {
   const [servers, refetchServers] = useQuery<
@@ -58,6 +58,9 @@ export const ServersGroup = (): JSX.Element => {
               <ServerCard key={server.id} server={server} />
             ))}
           </div>
+        )}
+        {servers.data?.servers.length === 0 && (
+          <CardNoInfo message="No Scrobbles" />
         )}
       </div>
     </TabLayout>
