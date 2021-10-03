@@ -14,7 +14,7 @@ export interface IServer {
 
 export interface IServersVariables {
   Input: {
-    take: number;
+    take?: number;
   };
 }
 

@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { IServer } from "graphql/queries/servers";
-import Image from "next/image";
-import { FiActivity, FiChevronDown, FiTrash } from "react-icons/fi";
+import { IServer } from 'graphql/queries/servers';
+import Image from 'next/image';
+import { FiActivity, FiChevronDown, FiX } from 'react-icons/fi';
 
-import { Disclosure } from "@headlessui/react";
+import { Disclosure } from '@headlessui/react';
 
-import { Button } from "../Button";
-import { Input } from "../Input";
+import { Button } from '../Button';
+import { Input } from '../Input';
 
 export interface ServerCardProps {
   server: IServer;
@@ -46,7 +46,7 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
             <hr />
             <div className="flex ml-auto space-x-2">
               <Button rightIcon={<FiActivity />}>Action</Button>
-              <Button rightIcon={<FiTrash />}>Delete</Button>
+              <Button rightIcon={<FiX />}>Unlink</Button>
             </div>
             <Input
               disabled

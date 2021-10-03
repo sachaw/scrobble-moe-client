@@ -1,16 +1,18 @@
 import { gql } from 'urql';
 
 export interface IPlexAccountServersResponse {
-  getPlexAccountServers: {
-    name: string;
-    address: string;
-    port: number;
-    version: string;
-    scheme: string;
-    host: string;
-    localAddresses: string;
-    machineIdentifier: string;
-  }[];
+  getPlexAccountServers: IPlexAccountServer[];
+}
+
+export interface IPlexAccountServer {
+  name: string;
+  address: string;
+  port: number;
+  version: string;
+  scheme: string;
+  host: string;
+  localAddresses: string;
+  machineIdentifier: string;
 }
 
 export const PLEX_ACCOUNT_SERVERS = gql`

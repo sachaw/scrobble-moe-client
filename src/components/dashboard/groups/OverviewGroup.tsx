@@ -82,7 +82,7 @@ export const OverviewGroup = (): JSX.Element => {
         />
       }
     >
-      {providerLoginUrls.fetching || (usersData.fetching && <CardLoading />)}
+      {(providerLoginUrls.fetching || usersData.fetching) && <CardLoading />}
 
       {providerLoginUrls.data &&
         usersData.data &&

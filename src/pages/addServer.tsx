@@ -1,28 +1,33 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "components/Button";
-import { Card, CardLoading } from "components/Card";
-import { IconButton } from "components/IconButton";
-import { TabLayout } from "components/TabLayout";
+import { Button } from 'components/Button';
+import { Card, CardLoading, CardNoInfo } from 'components/Card';
+import { IconButton } from 'components/IconButton';
+import { AddServerCard } from 'components/other/AddServerCard';
+import { TabLayout } from 'components/TabLayout';
 import {
   ILinkServerResponse,
   ILinkServerVariables,
   LINK_SERVER,
-} from "graphql/mutations/linkServer";
+} from 'graphql/mutations/linkServer';
 import {
   IPlexAccountServersResponse,
   PLEX_ACCOUNT_SERVERS,
-} from "graphql/queries/plexAccountServers";
-import { FiRefreshCw } from "react-icons/fi";
-import { useMutation, useQuery } from "urql";
+} from 'graphql/queries/plexAccountServers';
+import {
+  IServersResponse,
+  IServersVariables,
+  SERVERS,
+} from 'graphql/queries/servers';
+import Link from 'next/link';
+import { FiCornerDownLeft, FiRefreshCw } from 'react-icons/fi';
+import { useMutation, useQuery } from 'urql';
 
 const AddServer = (): JSX.Element => {
   const [linkedServer, getLinkedServer] = useMutation<
     ILinkServerResponse,
     ILinkServerVariables
   >(LINK_SERVER);
-  const [serversLinking, setServersLinking] = React.useState(false);
-  const [error, setError] = React.useState<string>();
 
   const [plexAccountServers, refetchPlexAccountServers] = useQuery<
     IPlexAccountServersResponse,
@@ -30,62 +35,71 @@ const AddServer = (): JSX.Element => {
   >({
     query: PLEX_ACCOUNT_SERVERS,
   });
+  const [servers, refetchServers] = useQuery<
+    IServersResponse,
+    IServersVariables
+  >({
+    query: SERVERS,
+    variables: {
+      Input: {},
+    },
+  });
+
+  const fetching =
+    linkedServer.fetching || plexAccountServers.fetching || servers.fetching;
+  const data = linkedServer.data || plexAccountServers.data || servers.data;
 
   const linkServer = (machineIdentifier: string): void => {
-    setServersLinking(true);
     void getLinkedServer({
       Input: {
         machineIdentifier,
       },
-    })
-      .then(() => {
-        setServersLinking(false);
-      })
-      .catch(() => {
-        setServersLinking(false);
-        setError(`Error linking server: ${machineIdentifier}`);
-      });
+    });
   };
   return (
     <Card title="Link Plex Server">
       <TabLayout
         actions={
-          <IconButton
-            onClick={(): void => {
-              refetchPlexAccountServers({
-                requestPolicy: "network-only",
-              });
-            }}
-            icon={
-              <FiRefreshCw
-                className={plexAccountServers.fetching ? "animate-spin" : ""}
-              />
-            }
-          />
+          <>
+            <Link passHref href="/dashboard">
+              <Button nested rightIcon={<FiCornerDownLeft />}>
+                Back
+              </Button>
+            </Link>
+            <IconButton
+              onClick={(): void => {
+                refetchPlexAccountServers({
+                  requestPolicy: "network-only",
+                });
+                refetchServers({
+                  requestPolicy: "network-only",
+                });
+              }}
+              icon={<FiRefreshCw className={fetching ? "animate-spin" : ""} />}
+            />
+          </>
         }
       >
-        {plexAccountServers.fetching && <CardLoading />}
-        {plexAccountServers.data && !plexAccountServers.fetching && (
-          <div>
-            {plexAccountServers.data.getPlexAccountServers.map((server) => (
-              <div key={server.machineIdentifier}>
-                <div className="flex justify-between">
-                  <div>{server.name}</div>
-                  {serversLinking ? (
-                    <Button>Linking...</Button>
-                  ) : (
-                    <Button
-                      onClick={(): void => {
-                        linkServer(server.machineIdentifier);
-                      }}
-                    >
-                      Link Server
-                    </Button>
-                  )}
-                </div>
-              </div>
+        {fetching && <CardLoading />}
+        {data && !fetching && (
+          <div className="space-y-2">
+            {plexAccountServers.data?.getPlexAccountServers.map((server) => (
+              <AddServerCard
+                key={server.machineIdentifier}
+                server={server}
+                linkServer={linkServer}
+                linked={
+                  servers.data?.servers.findIndex(
+                    (linkedServer) =>
+                      linkedServer.uuid === server.machineIdentifier
+                  ) !== -1
+                }
+              />
             ))}
           </div>
+        )}
+        {plexAccountServers.data?.getPlexAccountServers.length === 0 && (
+          <CardNoInfo message="No Servers" />
         )}
       </TabLayout>
     </Card>

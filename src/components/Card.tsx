@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { FiLoader } from 'react-icons/fi';
+
 import { Tab } from '@headlessui/react';
 
 type DefaulDivProps = JSX.IntrinsicElements["div"];
@@ -63,7 +65,9 @@ export const Card = ({
 
 export const CardLoading = (): JSX.Element => {
   return (
-    <div className="w-full h-full rounded-lg bg-background animate-pulse"></div>
+    <div className="flex w-full h-full rounded-lg bg-background animate-pulse">
+      <FiLoader className="m-auto text-4xl animate-spin" />
+    </div>
   );
 };
 

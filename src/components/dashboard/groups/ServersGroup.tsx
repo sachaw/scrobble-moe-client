@@ -60,7 +60,7 @@ export const ServersGroup = (): JSX.Element => {
           </div>
         )}
         {servers.data?.servers.length === 0 && (
-          <CardNoInfo message="No Scrobbles" />
+          <CardNoInfo message="No Servers" />
         )}
       </div>
     </TabLayout>
