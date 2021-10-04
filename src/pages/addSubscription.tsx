@@ -3,7 +3,6 @@ import React from 'react';
 import { LinkButton } from 'components/Button';
 import { Card, CardLoading, CardNoInfo } from 'components/Card';
 import { IconButton } from 'components/IconButton';
-import { AddSubscriptionCard } from 'components/other/AddSubscriptionCard';
 import { TabLayout } from 'components/TabLayout';
 import {
   ILinkServerResponse,
@@ -82,23 +81,7 @@ const AddSubscription = (): JSX.Element => {
         }
       >
         {fetching && <CardLoading />}
-        {data && !fetching && (
-          <div className="space-y-2">
-            {plexAccountServers.data?.getPlexAccountServers.map((server) => (
-              <AddSubscriptionCard
-                key={server.machineIdentifier}
-                server={server}
-                linkServer={linkServer}
-                linked={
-                  servers.data?.servers.findIndex(
-                    (linkedServer) =>
-                      linkedServer.uuid === server.machineIdentifier
-                  ) !== -1
-                }
-              />
-            ))}
-          </div>
-        )}
+        {data && !fetching && <div className="space-y-2"></div>}
         {plexAccountServers.data?.getPlexAccountServers.length === 0 && (
           <CardNoInfo message="No Servers" />
         )}
