@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardLoading } from 'components/Card';
+import { CardLoading, CardNoInfo } from 'components/Card';
 import { IconButton } from 'components/IconButton';
 import { TabLayout } from 'components/TabLayout';
 import {
@@ -60,6 +60,9 @@ export const TorrentClientsGroup = (): JSX.Element => {
           </div>
         )}
       </div>
+      {torrentClients.data?.torrentClients.length === 0 && (
+        <CardNoInfo message="No Torrent Clients" />
+      )}
     </TabLayout>
   );
 };

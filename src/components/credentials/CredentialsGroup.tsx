@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardLoading } from 'components/Card';
+import { CardLoading, CardNoInfo } from 'components/Card';
 import { IconButton } from 'components/IconButton';
 import { TabLayout } from 'components/TabLayout';
 import {
@@ -57,6 +57,9 @@ export const CredentialsGroup = (): JSX.Element => {
           </div>
         )}
       </div>
+      {authenticators.data?.authenticators.length === 0 && (
+        <CardNoInfo message="No Credentials" />
+      )}
     </TabLayout>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardLoading } from 'components/Card';
+import { CardLoading, CardNoInfo } from 'components/Card';
 import { IconButton } from 'components/IconButton';
 import { TabLayout } from 'components/TabLayout';
 import {
@@ -62,6 +62,9 @@ export const SeriesSubscriptionsGroup = (): JSX.Element => {
           </div>
         )}
       </div>
+      {seriesSubscriptions.data?.seriesSubscriptions.length === 0 && (
+        <CardNoInfo message="No Subscriptions" />
+      )}
     </TabLayout>
   );
 };
