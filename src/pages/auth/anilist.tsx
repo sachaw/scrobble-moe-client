@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Button } from 'components/Button';
+import { LinkButton } from 'components/Button';
 import {
   ADD_LINKED_ACCOUNT,
   IAddLinkedAccountResponse,
   IAddLinkedAccountVariables,
 } from 'graphql/mutations/addLinkAccount';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMutation } from 'urql';
 
@@ -37,18 +36,14 @@ const AniList = (): JSX.Element => {
         {linkedAccount.error && (
           <>
             <div>{linkedAccount.error.message}</div>
-            <Link passHref href="/dashboard">
-              <Button>Go to Dashboard</Button>
-            </Link>
+            <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
           </>
         )}
         {linkedAccount.data && (
           <>
             <div>Success!</div>
 
-            <Link passHref href="/dashboard">
-              <Button>Go to Dashboard</Button>
-            </Link>
+            <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
           </>
         )}
       </div>

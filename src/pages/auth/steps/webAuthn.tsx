@@ -1,25 +1,24 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "components/Button";
+import { Button, LinkButton } from 'components/Button';
 import {
   IWebauthnResponse,
   IWebauthnVariables,
   WEBAUTHN,
-} from "graphql/mutations/webauthn";
-import Link from "next/link";
-import { encode } from "universal-base64";
-import { useMutation } from "urql";
+} from 'graphql/mutations/webauthn';
+import { encode } from 'universal-base64';
+import { useMutation } from 'urql';
 
 import {
   startAuthentication,
   startRegistration,
-} from "@simplewebauthn/browser";
+} from '@simplewebauthn/browser';
 import {
   AuthenticationCredentialJSON,
   PublicKeyCredentialCreationOptionsJSON,
   PublicKeyCredentialRequestOptionsJSON,
   RegistrationCredentialJSON,
-} from "@simplewebauthn/typescript-types";
+} from '@simplewebauthn/typescript-types';
 
 export type IWebAuthnOptionsType =
   | PublicKeyCredentialCreationOptionsJSON
@@ -112,9 +111,7 @@ const WebAuthn = ({
         <>
           <div color="green.500">Success!</div>
 
-          <Link passHref href="/dashboard">
-            <Button>Go to Dashboard</Button>
-          </Link>
+          <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
         </>
       )}
     </div>

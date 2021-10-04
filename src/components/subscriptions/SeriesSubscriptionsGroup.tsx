@@ -8,11 +8,10 @@ import {
   ISeriesSubscriptionsVariables,
   SERIES_SUBSCRIPTIONS,
 } from 'graphql/queries/seriesSubscriptions';
-import Link from 'next/link';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
-import { Button } from '../Button';
+import { LinkButton } from '../Button';
 import { SeriesSubscriptionsCard } from './SeriesSubscriptionCard';
 
 export const SeriesSubscriptionsGroup = (): JSX.Element => {
@@ -30,11 +29,9 @@ export const SeriesSubscriptionsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <Link passHref href="/addCredential">
-            <Button nested rightIcon={<FiPlus />}>
-              Add Subscription
-            </Button>
-          </Link>
+          <LinkButton href="/addSubscription" nested rightIcon={<FiPlus />}>
+            Add Subscription
+          </LinkButton>
           <IconButton
             onClick={(): void => {
               refetchSeriesSubscriptions({

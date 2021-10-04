@@ -1,19 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { CardLoading } from "components/Card";
-import { IconButton } from "components/IconButton";
-import { TabLayout } from "components/TabLayout";
+import { CardLoading } from 'components/Card';
+import { IconButton } from 'components/IconButton';
+import { TabLayout } from 'components/TabLayout';
 import {
   AUTHENTICATORS,
   IAuthenticatorsResponse,
   IAuthenticatorsVariables,
-} from "graphql/queries/authenticators";
-import Link from "next/link";
-import { FiPlus, FiRefreshCw } from "react-icons/fi";
-import { useQuery } from "urql";
+} from 'graphql/queries/authenticators';
+import { FiPlus, FiRefreshCw } from 'react-icons/fi';
+import { useQuery } from 'urql';
 
-import { Button } from "../Button";
-import { CredentialCard } from "./CredentialCard";
+import { LinkButton } from '../Button';
+import { CredentialCard } from './CredentialCard';
 
 export const CredentialsGroup = (): JSX.Element => {
   const [authenticators, refetchAuthenticators] = useQuery<
@@ -30,11 +29,9 @@ export const CredentialsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <Link passHref href="/addCredential">
-            <Button nested rightIcon={<FiPlus />}>
-              Add Credential
-            </Button>
-          </Link>
+          <LinkButton href="/addCredential" nested rightIcon={<FiPlus />}>
+            Add Credential
+          </LinkButton>
           <IconButton
             onClick={(): void => {
               refetchAuthenticators({

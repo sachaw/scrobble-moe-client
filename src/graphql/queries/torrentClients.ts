@@ -4,12 +4,19 @@ export interface ITorrentClientsResponse {
   torrentClients: ITorrentClient[];
 }
 
+export enum ClientEnum {
+  DELUGE = "DELUGE",
+  RTORRENT = "RTORRENT",
+  QBITTORRENT = "QBITTORRENT",
+  UTORRENT = "UTORRENT",
+}
+
 export interface ITorrentClient {
   id: string;
   updatedAt: string;
   clientUrl: string;
   clientUsername: string;
-  client: "DELUGE" | "RTORRENT" | "QBITTORRENT" | "UTORRENT";
+  client: ClientEnum;
 }
 
 export interface ItorrentClientsVariables {

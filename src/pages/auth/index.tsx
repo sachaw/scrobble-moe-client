@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Button } from 'components/Button';
+import { Button, LinkButton } from 'components/Button';
 import { Card } from 'components/Card';
-import Link from 'next/link';
 import { plexOauth } from 'util/plex';
 
 const Auth = (): JSX.Element => {
@@ -22,9 +21,7 @@ const Auth = (): JSX.Element => {
     <Card title="Sign in with Plex">
       <div>
         {plexUrl ? (
-          <Link href={plexUrl} passHref>
-            <Button>Sign In</Button>
-          </Link>
+          <LinkButton href={plexUrl}>Sign In</LinkButton>
         ) : (
           <Button>Loading</Button>
         )}

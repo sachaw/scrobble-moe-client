@@ -3,7 +3,7 @@ import React from 'react';
 import { LinkButton } from 'components/Button';
 import { Card, CardLoading, CardNoInfo } from 'components/Card';
 import { IconButton } from 'components/IconButton';
-import { AddServerCard } from 'components/other/AddServerCard';
+import { AddSubscriptionCard } from 'components/other/AddSubscriptionCard';
 import { TabLayout } from 'components/TabLayout';
 import {
   ILinkServerResponse,
@@ -22,7 +22,7 @@ import {
 import { FiCornerDownLeft, FiRefreshCw } from 'react-icons/fi';
 import { useMutation, useQuery } from 'urql';
 
-const AddServer = (): JSX.Element => {
+const AddSubscription = (): JSX.Element => {
   const [linkedServer, getLinkedServer] = useMutation<
     ILinkServerResponse,
     ILinkServerVariables
@@ -85,7 +85,7 @@ const AddServer = (): JSX.Element => {
         {data && !fetching && (
           <div className="space-y-2">
             {plexAccountServers.data?.getPlexAccountServers.map((server) => (
-              <AddServerCard
+              <AddSubscriptionCard
                 key={server.machineIdentifier}
                 server={server}
                 linkServer={linkServer}
@@ -107,4 +107,4 @@ const AddServer = (): JSX.Element => {
   );
 };
 
-export default AddServer;
+export default AddSubscription;

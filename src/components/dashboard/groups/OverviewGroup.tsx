@@ -51,7 +51,7 @@ export const OverviewGroup = (): JSX.Element => {
       [];
     if (!unlinkedAccounts.length) {
       for (const account of linkableAccounts) {
-        if (userAccounts.includes(account)) {
+        if (!userAccounts.includes(account)) {
           setUnlinkedAccounts([...unlinkedAccounts, account]);
         }
       }

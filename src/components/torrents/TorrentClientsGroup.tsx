@@ -8,11 +8,10 @@ import {
   ItorrentClientsVariables,
   TORRENT_CLIENTS,
 } from 'graphql/queries/torrentClients';
-import Link from 'next/link';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
-import { Button } from '../Button';
+import { LinkButton } from '../Button';
 import { TorrentClientCard } from './TorrentClientCard';
 
 export const TorrentClientsGroup = (): JSX.Element => {
@@ -30,11 +29,9 @@ export const TorrentClientsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <Link passHref href="/addCredential">
-            <Button nested rightIcon={<FiPlus />}>
-              Add Torrent Client
-            </Button>
-          </Link>
+          <LinkButton href="/addTorrentClient" nested rightIcon={<FiPlus />}>
+            Add Torrent Client
+          </LinkButton>
           <IconButton
             onClick={(): void => {
               refetchTorrentClients({

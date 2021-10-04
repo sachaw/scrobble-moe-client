@@ -50,6 +50,9 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
             </div>
             <Input
               disabled
+              onCopy={(): void => {
+                console.log("Copied!");
+              }}
               value={`https://webhook.scrobble.moe/${server.secret}`}
             />
           </Disclosure.Panel>

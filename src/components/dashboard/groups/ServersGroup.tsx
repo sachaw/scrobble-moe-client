@@ -8,11 +8,10 @@ import {
   IServersVariables,
   SERVERS,
 } from 'graphql/queries/servers';
-import Link from 'next/link';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
-import { Button } from '../../Button';
+import { LinkButton } from '../../Button';
 import { ServerCard } from '../ServerCard';
 
 export const ServersGroup = (): JSX.Element => {
@@ -32,11 +31,9 @@ export const ServersGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <Link passHref href="/addServer">
-            <Button nested rightIcon={<FiPlus />}>
-              Add server
-            </Button>
-          </Link>
+          <LinkButton href="/addServer" nested rightIcon={<FiPlus />}>
+            Add server
+          </LinkButton>
           <IconButton
             onClick={(): void => {
               refetchServers({

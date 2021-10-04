@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "components/Button";
-import Image from "next/image";
-import Link from "next/link";
+import { LinkButton } from 'components/Button';
+import Image from 'next/image';
 
 const Page404 = (): JSX.Element => {
   return (
@@ -18,9 +17,7 @@ const Page404 = (): JSX.Element => {
         <div>Page not Found.</div>
 
         <div>
-          <Link href="/dashboard" passHref>
-            <Button>Dashboard</Button>
-          </Link>
+          <LinkButton href="dashboard">Dashboard</LinkButton>
         </div>
       </div>
     </>
