@@ -1,10 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { SelectableCard } from "components/SelectableCard";
-import { IScrobble } from "graphql/queries/scrobbles";
-import Image from "next/image";
-import { FiMoreVertical } from "react-icons/fi";
-import TimeAgo from "react-timeago";
+import { SelectableCard } from 'components/SelectableCard';
+import { IScrobble } from 'graphql/queries/scrobbles';
+import Image from 'next/image';
 
 export interface UserCardProps {
   scrobble: IScrobble;
@@ -12,7 +10,7 @@ export interface UserCardProps {
 
 export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
   return (
-    <SelectableCard status="success">
+    <SelectableCard status="success" updatedAt={scrobble.updatedAt}>
       <div className="flex justify-between w-full">
         <div>
           <div className="flex text-gray-600">
@@ -34,12 +32,6 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
           </div>
         </div>
         <div>Episode {scrobble.episode}</div>
-        <div className="flex">
-          <small className="my-auto text-xs font-medium text-gray-600">
-            <TimeAgo date={scrobble.updatedAt} />
-          </small>
-          <FiMoreVertical className="my-auto ml-2 text-lg cursor-pointer hover:text-gray-600" />
-        </div>
       </div>
     </SelectableCard>
   );
