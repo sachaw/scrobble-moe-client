@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { IconButton } from 'components/IconButton';
 import { IServer } from 'graphql/queries/servers';
 import Image from 'next/image';
-import { FiActivity, FiChevronDown, FiX } from 'react-icons/fi';
+import { FiActivity, FiChevronDown, FiClipboard, FiX } from 'react-icons/fi';
 
 import { Disclosure } from '@headlessui/react';
 
@@ -49,10 +50,9 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
               <Button rightIcon={<FiX />}>Unlink</Button>
             </div>
             <Input
+              title="Webhook URL"
               disabled
-              onCopy={(): void => {
-                console.log("Copied!");
-              }}
+              action={<IconButton icon={<FiClipboard />} />}
               value={`https://webhook.scrobble.moe/${server.secret}`}
             />
           </Disclosure.Panel>

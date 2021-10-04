@@ -7,11 +7,13 @@ type DefaulDivProps = JSX.IntrinsicElements["div"];
 export interface SelectableCardProps extends DefaulDivProps {
   status?: "success" | "warn" | "fail" | "running" | "pening";
   updatedAt?: string;
+  actions?: JSX.Element;
 }
 
 export const SelectableCard = ({
   status,
   updatedAt,
+  actions,
   children,
   className,
   ...props
@@ -39,10 +41,11 @@ export const SelectableCard = ({
         )}
         {children}
         {updatedAt && (
-          <small className="my-auto text-xs font-medium text-gray-600 whitespace-nowrap">
+          <small className="my-auto text-xs font-medium text-gray-600 select-none whitespace-nowrap">
             <ReactTimeago date={updatedAt} />
           </small>
         )}
+        {actions}
       </div>
     </div>
   );

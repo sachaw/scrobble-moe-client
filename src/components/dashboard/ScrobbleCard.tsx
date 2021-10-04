@@ -14,7 +14,9 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
       <div className="flex justify-between w-full">
         <div>
           <div className="flex text-gray-600">
-            <small className="flex my-auto mr-1 text-sm ">Success</small>
+            <small className="flex my-auto mr-1 text-sm ">
+              Episode {scrobble.episode}
+            </small>
             {scrobble.accounts.map((account, index) => (
               <Image
                 className="my-auto"
@@ -31,7 +33,6 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
             {scrobble.anilistData?.title ?? "Unknown"}
           </div>
         </div>
-        <div>Episode {scrobble.episode}</div>
       </div>
     </SelectableCard>
   );

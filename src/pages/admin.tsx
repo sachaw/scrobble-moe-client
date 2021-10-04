@@ -11,6 +11,7 @@ const Admin = (): JSX.Element => {
         <div className="flex mx-auto space-x-4">
           <a
             title="Prisma"
+            href="https://cloud.prisma.io/"
             className="flex w-40 h-40 bg-gray-100 rounded-lg cursor-pointer hover:scale-95"
           >
             <div className="m-auto">
@@ -23,6 +24,7 @@ const Admin = (): JSX.Element => {
           </a>
           <a
             title="Railway"
+            href="https://railway.app/"
             className="flex w-40 h-40 bg-gray-100 rounded-lg cursor-pointer hover:scale-95"
           >
             <div className="m-auto">
@@ -35,7 +37,7 @@ const Admin = (): JSX.Element => {
           </a>
           <a
             title="GitHub"
-            href="https://github.com/scrobble-moe"
+            href="https://github.com/scrobble-moe/"
             className="flex w-40 h-40 bg-gray-100 rounded-lg cursor-pointer hover:scale-95"
           >
             <div className="m-auto">
