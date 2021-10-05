@@ -59,10 +59,10 @@ export const TorrentClientsGroup = (): JSX.Element => {
             ))}
           </div>
         )}
+        {torrentClients.data?.torrentClients.length === 0 && (
+          <CardNoInfo message="No Torrent Clients" />
+        )}
       </div>
-      {torrentClients.data?.torrentClients.length === 0 && (
-        <CardNoInfo message="No Torrent Clients" />
-      )}
     </TabLayout>
   );
 };

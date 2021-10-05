@@ -61,10 +61,10 @@ export const SeriesSubscriptionsGroup = (): JSX.Element => {
             )}
           </div>
         )}
+        {seriesSubscriptions.data?.seriesSubscriptions.length === 0 && (
+          <CardNoInfo message="No Subscriptions" />
+        )}
       </div>
-      {seriesSubscriptions.data?.seriesSubscriptions.length === 0 && (
-        <CardNoInfo message="No Subscriptions" />
-      )}
     </TabLayout>
   );
 };

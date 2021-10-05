@@ -56,10 +56,10 @@ export const CredentialsGroup = (): JSX.Element => {
             ))}
           </div>
         )}
+        {authenticators.data?.authenticators.length === 0 && (
+          <CardNoInfo message="No Credentials" />
+        )}
       </div>
-      {authenticators.data?.authenticators.length === 0 && (
-        <CardNoInfo message="No Credentials" />
-      )}
     </TabLayout>
   );
 };
