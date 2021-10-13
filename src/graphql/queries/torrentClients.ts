@@ -19,7 +19,7 @@ export interface ITorrentClient {
   client: ClientEnum;
 }
 
-export interface ItorrentClientsVariables {
+export interface ITorrentClientVariables {
   Input: {
     take?: number;
   };

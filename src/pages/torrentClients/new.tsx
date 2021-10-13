@@ -12,18 +12,19 @@ import {
   IAddTorrentClientVariables,
 } from 'graphql/mutations/addTorrentClient';
 import { ITorrentClient } from 'graphql/queries/torrentClients';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { FiCornerDownLeft, FiDelete, FiPlus } from 'react-icons/fi';
 import { useMutation } from 'urql';
 
-const AddTorrentClient = (): JSX.Element => {
+const NewTorrentClient = (): JSX.Element => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<IAddTorrentClientInput>();
-
+  const router = useRouter();
   const [torrentClient, AddTorrentClient] = useMutation<
     ITorrentClient,
     IAddTorrentClientVariables
@@ -37,6 +38,8 @@ const AddTorrentClient = (): JSX.Element => {
         clientPassword: data.clientPassword,
         client: data.client,
       },
+    }).then(() => {
+      void router.push("/torrentClients");
     });
   });
 
@@ -94,7 +97,6 @@ const AddTorrentClient = (): JSX.Element => {
               ]}
               {...register("client", { required: true })}
             />
-            {errors.client && <span>This field is required</span>}
             <div className="ml-auto">
               <Button type="submit" nested rightIcon={<FiPlus />}>
                 Add Client
@@ -107,4 +109,4 @@ const AddTorrentClient = (): JSX.Element => {
   );
 };
 
-export default AddTorrentClient;
+export default NewTorrentClient;

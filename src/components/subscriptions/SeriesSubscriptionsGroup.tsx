@@ -12,7 +12,7 @@ import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { useQuery } from 'urql';
 
 import { LinkButton } from '../Button';
-import { SeriesSubscriptionsCard } from './SeriesSubscriptionCard';
+import { SeriesSubscriptionCard } from './SeriesSubscriptionCard';
 
 export const SeriesSubscriptionsGroup = (): JSX.Element => {
   const [seriesSubscriptions, refetchSeriesSubscriptions] = useQuery<
@@ -29,7 +29,7 @@ export const SeriesSubscriptionsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <LinkButton href="/addSubscription" nested rightIcon={<FiPlus />}>
+          <LinkButton href="/subscriptions/new" nested rightIcon={<FiPlus />}>
             Add Subscription
           </LinkButton>
           <IconButton
@@ -53,7 +53,7 @@ export const SeriesSubscriptionsGroup = (): JSX.Element => {
           <div className="space-y-2">
             {seriesSubscriptions.data.seriesSubscriptions.map(
               (seriesSubscription) => (
-                <SeriesSubscriptionsCard
+                <SeriesSubscriptionCard
                   key={seriesSubscription.id}
                   seriesSubscription={seriesSubscription}
                 />

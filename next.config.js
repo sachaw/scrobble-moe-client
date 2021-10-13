@@ -16,7 +16,7 @@ module.exports = withPWA(
       register: true,
     },
     images: {
-      domains: ["plex.tv", "devicons.railway.app"],
+      domains: ["plex.tv", "devicons.railway.app", "s4.anilist.co"],
     },
     experimental: { esmExternals: true },
     esmExternals: true,

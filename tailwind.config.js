@@ -1,7 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: ["./public/**/*.html", "./src/**/*.tsx"],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./public/**/*.html", "./src/**/*.tsx"],
   theme: {
     fontFamily: {
       serif: [
@@ -97,5 +96,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

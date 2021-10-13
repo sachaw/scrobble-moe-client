@@ -29,7 +29,7 @@ export const CredentialsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <LinkButton href="/addCredential" nested rightIcon={<FiPlus />}>
+          <LinkButton href="/credentials/new" nested rightIcon={<FiPlus />}>
             Add Credential
           </LinkButton>
           <IconButton

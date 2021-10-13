@@ -5,7 +5,7 @@ import { IconButton } from 'components/IconButton';
 import { TabLayout } from 'components/TabLayout';
 import {
   ITorrentClientsResponse,
-  ItorrentClientsVariables,
+  ITorrentClientVariables,
   TORRENT_CLIENTS,
 } from 'graphql/queries/torrentClients';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
@@ -17,7 +17,7 @@ import { TorrentClientCard } from './TorrentClientCard';
 export const TorrentClientsGroup = (): JSX.Element => {
   const [torrentClients, refetchTorrentClients] = useQuery<
     ITorrentClientsResponse,
-    ItorrentClientsVariables
+    ITorrentClientVariables
   >({
     query: TORRENT_CLIENTS,
     variables: {
@@ -29,7 +29,7 @@ export const TorrentClientsGroup = (): JSX.Element => {
     <TabLayout
       actions={
         <>
-          <LinkButton href="/addTorrentClient" nested rightIcon={<FiPlus />}>
+          <LinkButton href="/torrentClients/new" nested rightIcon={<FiPlus />}>
             Add Torrent Client
           </LinkButton>
           <IconButton

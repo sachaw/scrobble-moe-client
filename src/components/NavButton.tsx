@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export interface LinkButtonProps {
+export interface NavButtonProps {
   href: string;
   icon: React.ReactNode;
   text: string;
   active?: boolean;
 }
 
-export const LinkButton = ({
+export const NavButton = ({
   href,
   icon,
   text,
-}: LinkButtonProps): JSX.Element => {
+}: NavButtonProps): JSX.Element => {
   const router = useRouter();
   return (
     <Link passHref href={href}>
