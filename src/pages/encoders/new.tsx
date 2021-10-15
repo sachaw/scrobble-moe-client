@@ -33,6 +33,7 @@ const NewEncoder = (): JSX.Element => {
       Input: {
         name: data.name,
         rssURL: data.rssURL,
+        matchRegex: data.matchRegex,
       },
     }).then(() => {
       void router.push("/encoders");
@@ -75,6 +76,11 @@ const NewEncoder = (): JSX.Element => {
               title="RSS URL"
               error={errors.rssURL?.message}
               {...register("rssURL", { required: true })}
+            />
+            <Input
+              title="Match Regex"
+              error={errors.matchRegex?.message}
+              {...register("matchRegex", { required: true })}
             />
 
             <div className="ml-auto">

@@ -6,6 +6,7 @@ import { Card, CardLoading } from 'components/Card';
 import { IconButton } from 'components/IconButton';
 import { Input } from 'components/Input';
 import { Select } from 'components/Select';
+import { FeedFilter } from 'components/subscriptions/FeedFilter';
 import { TabLayout } from 'components/TabLayout';
 import {
   ADD_SERIES_SUBSCRIPTION,
@@ -14,6 +15,7 @@ import {
 } from 'graphql/mutations/addSeriesSubscription';
 import {
   ENCODERS,
+  IEncoder,
   IEncodersResponse,
   IEncodersVariables,
 } from 'graphql/queries/encoders';
@@ -28,6 +30,9 @@ const NewSubscription = (): JSX.Element => {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
+
     formState: { errors },
   } = useForm<IAddSeriesSubscriptionInput>();
   const router = useRouter();
@@ -50,6 +55,7 @@ const NewSubscription = (): JSX.Element => {
       Input: {
         nameIncludes: data.nameIncludes,
         nameExcludes: data.nameExcludes,
+        episodeOffset: data.episodeOffset,
         providerMediaId: data.providerMediaId,
         encoderId: data.encoderId,
       },
@@ -85,16 +91,6 @@ const NewSubscription = (): JSX.Element => {
             className="flex flex-col space-y-4"
             onSubmit={onSubmit}
           >
-            {/* <Input
-              title="AniList ID"
-              error={errors.providerMediaId?.message}
-              {...register("providerMediaId", { required: true })}
-            /> */}
-            <AnilistSearch
-              setId={(id): void => {
-                console.log(id);
-              }}
-            />
             <Select
               title="Encoder"
               options={encoders.data.encoders.map((encoder) => ({
@@ -102,6 +98,13 @@ const NewSubscription = (): JSX.Element => {
                 value: encoder.id,
               }))}
               {...register("encoderId", { required: true })}
+            />
+            <AnilistSearch
+              setId={(id: number): void => {
+                setValue("providerMediaId", id.toString());
+              }}
+              error={errors.providerMediaId?.message}
+              {...register("providerMediaId", { required: true })}
             />
             <Input
               title="Name Includes"
@@ -111,9 +114,32 @@ const NewSubscription = (): JSX.Element => {
             <Input
               title="Name Excludes"
               error={errors.nameExcludes?.message}
-              {...register("nameExcludes", { required: true })}
+              {...(register("nameExcludes"), { required: false })}
             />
-            <div className="ml-auto">
+            <Input
+              title="Episode Offset"
+              error={errors.episodeOffset?.message}
+              type="number"
+              defaultValue={0}
+              {...register("episodeOffset", {
+                required: true,
+                valueAsNumber: true,
+              })}
+            />
+            <FeedFilter
+              encoderId={watch("encoderId")}
+              includes={watch("nameIncludes")}
+              excludes={watch("nameExcludes")}
+              matchRegex={
+                (
+                  encoders.data.encoders.find(
+                    (encoder) => encoder.id === watch("encoderId")
+                  ) as IEncoder
+                )?.matchRegex
+              }
+              episodeOffset={watch("episodeOffset")}
+            />
+            <div className="ml-auto mr-4 md:mr-0">
               <Button type="submit" nested rightIcon={<FiPlus />}>
                 Add Subscription
               </Button>

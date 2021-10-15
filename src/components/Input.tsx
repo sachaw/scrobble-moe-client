@@ -16,7 +16,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {error && <span className="ml-2 text-red-500">{error}</span>}
       </label>
       <div
-        className={`flex w-full border rounded-md ${
+        className={`flex w-full border-y md:border md:rounded-md ${
           error
             ? "border-red-500"
             : "border-gray-200 focus-within:border-gray-400 hover:border-gray-400"

@@ -48,7 +48,7 @@ export const Card = ({
               </Tab>
             ))}
           </Tab.List>
-          <Tab.Panels className="h-[32rem]">
+          <Tab.Panels className="min-h-[32rem]">
             {tabs.map((tab, index) => (
               <Tab.Panel key={index} className="h-full my-8 md:m-8 md:pb-8">
                 <tab.component />
@@ -58,14 +58,14 @@ export const Card = ({
         </Tab.Group>
       )}
 
-      {children && <div className="my-8 md:m-8 h-[32rem]">{children}</div>}
+      {children && <div className="my-8 md:m-8 min-h-[32rem]">{children}</div>}
     </div>
   );
 };
 
 export const CardLoading = (): JSX.Element => {
   return (
-    <div className="flex w-full h-full rounded-lg bg-background animate-pulse">
+    <div className="flex w-full h-[32rem] rounded-lg bg-background animate-pulse">
       <FiLoader className="m-auto text-4xl animate-spin" />
     </div>
   );
@@ -77,7 +77,7 @@ export interface CardNoInfoProps {
 
 export const CardNoInfo = ({ message }: CardNoInfoProps): JSX.Element => {
   return (
-    <div className="flex w-full h-full rounded-lg bg-background">
+    <div className="flex w-full h-[32rem] rounded-lg bg-background">
       <div className="m-auto text-4xl font-semibold">{message}</div>
     </div>
   );

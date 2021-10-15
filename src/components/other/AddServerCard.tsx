@@ -18,8 +18,8 @@ export const AddServerCard = ({
 }: AddServerCardProps): JSX.Element => {
   return (
     <SelectableCard status={linked ? "success" : "pening"}>
-      <div className="flex justify-between w-full">
-        <div className="my-auto font-medium">{server.name}</div>
+      <div className="flex justify-between w-full space-x-2">
+        <div className="my-auto font-medium truncate">{server.name}</div>
         {linked ? (
           <Button
             onClick={(): void => {
@@ -36,7 +36,7 @@ export const AddServerCard = ({
             }}
             rightIcon={<FiLink />}
           >
-            Link Server
+            Link
           </Button>
         )}
       </div>

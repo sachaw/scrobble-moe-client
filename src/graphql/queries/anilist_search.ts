@@ -1,5 +1,13 @@
 import { gql } from 'urql';
 
+export enum IStatusEnum {
+  FINISHED = "FINISHED",
+  RELEASING = "RELEASING",
+  NOT_YET_RELEASED = "NOT_YET_RELEASED",
+  CANCELLED = "CANCELLED",
+  HIATUS = "HIATUS",
+}
+
 export interface IAniListAnime {
   id: number;
   title: {
@@ -12,6 +20,8 @@ export interface IAniListAnime {
     extraLarge: string;
   };
   description: string;
+  episodes: number;
+  status: IStatusEnum;
 }
 
 export interface IIAniListSearchResponse {
@@ -46,6 +56,8 @@ export const ANILIST_SEARCH = gql`
           extraLarge
         }
         description
+        episodes
+        status
       }
     }
   }

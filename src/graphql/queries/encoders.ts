@@ -9,6 +9,7 @@ export interface IEncoder {
   updatedAt: string;
   name: string;
   rssURL: string;
+  matchRegex: string;
 }
 
 export interface IEncodersVariables {
@@ -29,6 +30,7 @@ export const ENCODERS = gql`
       updatedAt
       name
       rssURL
+      matchRegex
     }
   }
 `;

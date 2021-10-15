@@ -6,6 +6,7 @@ import {
   IAniListAnime,
   IAniListSearchVariabled,
   IIAniListSearchResponse,
+  IStatusEnum,
 } from 'graphql/queries/anilist_search';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
@@ -16,16 +17,17 @@ import { IconButton } from './IconButton';
 import { Input } from './Input';
 
 export interface AnilistSearchProps {
+  error?: string;
   setId: (id: number) => void;
 }
 
-export const AnilistSearch = ({ setId }: AnilistSearchProps): JSX.Element => {
+export const AnilistSearch = React.forwardRef<
+  HTMLInputElement,
+  AnilistSearchProps
+>(({ error, setId, ...props }, ref): JSX.Element => {
   const client = new GraphQLClient("https://graphql.anilist.co/");
-  const { register, watch, handleSubmit } = useForm<{ search: string }>();
+  const { register, watch } = useForm<{ search: string }>();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
   const [selectedAnime, setSelectedAnime] = React.useState<IAniListAnime>();
   const [animeOptions, setAnimeOptions] = React.useState<IAniListAnime[]>([]);
   const [searchPhrase, setSearchPhrase] = React.useState("");
@@ -56,24 +58,26 @@ export const AnilistSearch = ({ setId }: AnilistSearchProps): JSX.Element => {
   React.useEffect(() => {
     const subscription = watch((value) => {
       setSearchPhrase(value.search);
+      setSelectedAnime(undefined);
       setLoading(true);
     });
     return (): void => subscription.unsubscribe();
   }, [watch]);
 
-  useDebounce(handleSearch, 1000, [searchPhrase]);
+  useDebounce(handleSearch, 500, [searchPhrase]);
 
   return (
     <>
-      <input className="hidden" />
-      <div className="flex flex-col h-full !mt-0 space-y-1">
+      <input ref={ref} className="hidden" {...props} />
+      <div className="flex flex-col h-full space-y-1">
         <Input
           title="AniList ID"
           action={<IconButton icon={<FiSearch />} />}
           placeholder="AniList ID or name"
+          error={error}
           {...register("search", { required: true })}
         />
-        <div className="border border-gray-200 rounded-md">
+        <div className="border-gray-200 border-y md:border md:rounded-md">
           {selectedAnime && (
             <div className="flex p-2">
               <Image
@@ -85,8 +89,26 @@ export const AnilistSearch = ({ setId }: AnilistSearchProps): JSX.Element => {
               <div className="flex flex-col w-full pl-2">
                 <div className="flex justify-between">
                   <div className="font-semibold">
-                    {selectedAnime.title.romaji}
-                    <div className="text-sm font-bold text-gray-600">
+                    <div className="flex truncate">
+                      {selectedAnime.title.romaji}{" "}
+                      <div
+                        className={`min-w-[3] w-3 h-3 my-auto mx-2 rounded-full ${
+                          selectedAnime.status === IStatusEnum.RELEASING
+                            ? "bg-green-500"
+                            : selectedAnime.status === IStatusEnum.FINISHED
+                            ? "bg-pink-500"
+                            : selectedAnime.status === IStatusEnum.CANCELLED
+                            ? "bg-red-500"
+                            : selectedAnime.status === IStatusEnum.HIATUS
+                            ? "bg-blue-500"
+                            : "bg-yellow-500"
+                        }`}
+                      />
+                    </div>
+                    <div className="flex text-sm font-bold text-gray-600">
+                      <div className="font-light">
+                        {selectedAnime.episodes} Episodes -&nbsp;
+                      </div>
                       {selectedAnime.startDate.year}
                     </div>
                   </div>
@@ -117,7 +139,9 @@ export const AnilistSearch = ({ setId }: AnilistSearchProps): JSX.Element => {
                       setId(anime.id);
                     }}
                   >
-                    <div className="font-semibold">{anime.title.romaji}</div>
+                    <div className="font-semibold truncate">
+                      {anime.title.romaji}
+                    </div>
                     <div className="text-sm font-bold text-gray-600">
                       {anime.startDate.year}
                     </div>
@@ -139,4 +163,4 @@ export const AnilistSearch = ({ setId }: AnilistSearchProps): JSX.Element => {
       </div>
     </>
   );
-};
+});

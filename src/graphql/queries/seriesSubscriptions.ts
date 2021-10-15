@@ -8,7 +8,8 @@ export interface ISeriesSubscription {
   id: string;
   updatedAt: string;
   nameIncludes: string;
-  nameExcludes: string[];
+  nameExcludes: string;
+  episodeOffset: number;
   providerMediaId: string;
 }
 
@@ -25,6 +26,7 @@ export const SERIES_SUBSCRIPTIONS = gql`
       updatedAt
       nameIncludes
       nameExcludes
+      episodeOffset
       providerMediaId
     }
   }

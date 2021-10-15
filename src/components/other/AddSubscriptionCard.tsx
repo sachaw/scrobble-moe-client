@@ -36,7 +36,7 @@ export const AddSubscription = ({
             }}
             rightIcon={<FiLink />}
           >
-            Link Server
+            Link
           </Button>
         )}
       </div>

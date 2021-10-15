@@ -7,6 +7,7 @@ export interface IAddSeriesSubscriptionVariables {
 export interface IAddSeriesSubscriptionInput {
   nameIncludes: string;
   nameExcludes: string;
+  episodeOffset: number;
   providerMediaId: string;
   encoderId: string;
 }
@@ -18,6 +19,7 @@ export const ADD_SERIES_SUBSCRIPTION = gql`
       updatedAt
       nameIncludes
       nameExcludes
+      episodeOffset
       providerMediaId
     }
   }
