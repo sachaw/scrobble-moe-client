@@ -132,7 +132,7 @@ export const EncoderGroup = ({ id }: IEncoderGroupProps): JSX.Element => {
           encoderFeed.data &&
           !encoders.fetching &&
           !encoderFeed.fetching && (
-            <div className="space-y-2 overflow-y-auto">
+            <div className="space-y-2 h-[32rem] overflow-y-auto">
               {feed.map((feedItem) => (
                 <FeedItemCard key={feedItem.guid} feedItem={feedItem} />
               ))}

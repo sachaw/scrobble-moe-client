@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { Footer } from "./Footer";
-import { Header } from "./Header";
-import { Sidebar } from "./Sidebar";
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { Sidebar } from './Sidebar';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -17,11 +17,15 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
       <Header />
       <div className="flex-grow w-full max-w-screen-xl mx-auto md:flex md:space-x-4">
         {["/", "/auth", "/auth/callback"].includes(router.pathname) ? (
-          <div className="container max-w-3xl mx-auto">{children}</div>
+          <div className="container max-w-3xl mx-auto overflow-hidden">
+            {children}
+          </div>
         ) : (
           <>
             <Sidebar />
-            <div className="container max-w-3xl mr-auto">{children}</div>
+            <div className="container max-w-3xl mr-auto overflow-hidden">
+              {children}
+            </div>
           </>
         )}
       </div>

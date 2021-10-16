@@ -1,17 +1,13 @@
 {
   "name": "scrobble-moe-client",
   "version": "0.1.0",
-  "private": true,
-  "author": "sozonome",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
     "format": "prettier --write src",
-    "up-latest": "yarn upgrade-interactive --latest",
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main"
   },
@@ -32,7 +28,6 @@
     "next": "^11.1.2",
     "next-pwa": "^5.3.1",
     "next-seo": "^4.26.0",
-    "next-sitemap": "^1.6.164",
     "next-transpile-modules": "^8.0.0",
     "plex-oauth": "^2.0.1",
     "postcss": "^8.3.8",
@@ -65,14 +60,5 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "lint-staged": "^11.1.2",
     "standard-version": "^9.3.1"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --max-warnings=0",
-      "prettier --write"
-    ],
-    "src/**/*.{json,css,scss,md}": [
-      "prettier --write"
-    ]
   }
 }
