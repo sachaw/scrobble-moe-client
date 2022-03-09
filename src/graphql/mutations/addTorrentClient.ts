@@ -1,4 +1,3 @@
-import { ClientEnum } from 'graphql/queries/torrentClients.js';
 import { gql } from 'urql';
 
 export interface IAddTorrentClientVariables {
@@ -9,7 +8,6 @@ export interface IAddTorrentClientInput {
   clientUrl: string;
   clientUsername: string;
   clientPassword: string;
-  client: ClientEnum;
 }
 
 export const ADD_TORRENT_CLIENT = gql`
@@ -19,7 +17,6 @@ export const ADD_TORRENT_CLIENT = gql`
       updatedAt
       clientUrl
       clientUsername
-      client
     }
   }
 `;

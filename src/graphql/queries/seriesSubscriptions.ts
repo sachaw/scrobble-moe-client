@@ -1,5 +1,7 @@
 import { gql } from 'urql';
 
+import { IAniListData } from './latestScrobbles.js';
+
 export interface ISeriesSubscriptionsResponse {
   seriesSubscriptions: ISeriesSubscription[];
 }
@@ -11,6 +13,7 @@ export interface ISeriesSubscription {
   nameExcludes: string;
   episodeOffset: number;
   providerMediaId: string;
+  anilist: IAniListData;
 }
 
 export interface ISeriesSubscriptionsVariables {
@@ -28,6 +31,16 @@ export const SERIES_SUBSCRIPTIONS = gql`
       nameExcludes
       episodeOffset
       providerMediaId
+      anilist {
+        id
+        title
+        type
+        status
+        description
+        coverImage
+        bannerImage
+        episodes
+      }
     }
   }
 `;

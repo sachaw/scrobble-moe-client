@@ -23,14 +23,14 @@ export const SeriesSubscriptionCard = ({
       updatedAt={seriesSubscription.updatedAt}
       actions={
         <IconButton
-          confirmAction={() => console.log("deleted")}
+          confirmAction={(): void => console.log("deleted")}
           icon={<FiTrash />}
         />
       }
     >
       <div className="flex justify-between w-full">
         <div className="my-auto text-sm font-semibold">
-          {seriesSubscription.providerMediaId}
+          {seriesSubscription.anilist.title}
         </div>
       </div>
     </SelectableCard>

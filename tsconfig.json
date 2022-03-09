@@ -8,14 +8,15 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "src",
     "importHelpers": true,
-    "removeComments": true
+    "removeComments": true,
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

@@ -16,9 +16,9 @@ export const Sidebar = (): JSX.Element => {
       <NavButton href="/dashboard" icon={<FiActivity />} text="Dashboard" />
       <NavButton href="/credentials" icon={<FiKey />} text="Credentials" />
       <NavButton
-        href="/torrentClients"
+        href="/torrentClient"
         icon={<FiDatabase />}
-        text="Torrent Clients"
+        text="Torrent Client"
       />
       <NavButton href="/encoders" icon={<FiVideo />} text="Encoders" />
       <NavButton href="/subscriptions" icon={<FiRss />} text="Subscriptions" />

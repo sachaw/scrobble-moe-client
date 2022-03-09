@@ -4,14 +4,13 @@ import { Button, LinkButton } from 'components/Button';
 import { Card, CardLoading } from 'components/Card';
 import { IconButton } from 'components/IconButton';
 import { Input } from 'components/Input';
-import { Select } from 'components/Select';
 import { TabLayout } from 'components/TabLayout';
 import {
   ADD_TORRENT_CLIENT,
   IAddTorrentClientInput,
   IAddTorrentClientVariables,
 } from 'graphql/mutations/addTorrentClient';
-import { ITorrentClient } from 'graphql/queries/torrentClients';
+import { ITorrentClient } from 'graphql/queries/torrentClient';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { FiCornerDownLeft, FiDelete, FiPlus } from 'react-icons/fi';
@@ -36,10 +35,9 @@ const NewTorrentClient = (): JSX.Element => {
         clientUrl: data.clientUrl,
         clientUsername: data.clientUsername,
         clientPassword: data.clientPassword,
-        client: data.client,
       },
     }).then(() => {
-      void router.push("/torrentClients");
+      void router.push("/torrentClient");
     });
   });
 
@@ -50,7 +48,7 @@ const NewTorrentClient = (): JSX.Element => {
           <>
             <LinkButton
               nested
-              href="/torrentClients"
+              href="/torrentClient"
               rightIcon={<FiCornerDownLeft />}
             >
               Back
@@ -86,16 +84,6 @@ const NewTorrentClient = (): JSX.Element => {
               error={errors.clientPassword?.message}
               type="password"
               {...register("clientPassword", { required: true })}
-            />
-            <Select
-              title="Application"
-              options={[
-                { name: "Deluge", value: "DELUGE" },
-                { name: "RTorrent", value: "RTORRENT" },
-                { name: "QBittorrent", value: "QBITTORRENT" },
-                { name: "UTorrent", value: "UTORRENT" },
-              ]}
-              {...register("client", { required: true })}
             />
             <div className="ml-auto">
               <Button type="submit" nested rightIcon={<FiPlus />}>

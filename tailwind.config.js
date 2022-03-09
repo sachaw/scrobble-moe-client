@@ -1,5 +1,4 @@
 module.exports = {
-  mode: "jit",
   content: ["./public/**/*.html", "./src/**/*.tsx"],
   theme: {
     fontFamily: {

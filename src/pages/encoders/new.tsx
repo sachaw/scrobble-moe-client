@@ -82,6 +82,20 @@ const NewEncoder = (): JSX.Element => {
               error={errors.matchRegex?.message}
               {...register("matchRegex", { required: true })}
             />
+            <div className="-mt-2 text-xs font-medium text-gray-500">
+              Regex should match from start of string, and include named capture
+              groups for{" "}
+              <code className="bg-gray-100 py-1 px-2 rounded-full">name</code>,{" "}
+              <code className="bg-gray-100 py-1 px-2 rounded-full">
+                episode
+              </code>
+              , and optionally{" "}
+              <code className="bg-gray-100 py-1 px-2 rounded-full">season</code>
+              . i.e.{" "}
+              <code className="bg-gray-100 py-1 px-2 rounded-full">
+                ^\[ASW\] (?&lt;name&gt;.*) - (?&lt;episode&gt;\d+)
+              </code>
+            </div>
 
             <div className="ml-auto">
               <Button type="submit" nested rightIcon={<FiPlus />}>

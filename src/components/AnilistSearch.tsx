@@ -57,7 +57,7 @@ export const AnilistSearch = React.forwardRef<
 
   React.useEffect(() => {
     const subscription = watch((value) => {
-      setSearchPhrase(value.search);
+      setSearchPhrase(value.search ?? "");
       setSelectedAnime(undefined);
       setLoading(true);
     });
