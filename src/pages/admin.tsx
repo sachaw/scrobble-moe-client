@@ -20,7 +20,7 @@ const AdminCard = ({
       className="flex min-w-[10rem] m-2 w-40 h-40 bg-gray-100 rounded-lg cursor-pointer hover:scale-95"
     >
       <div className="m-auto">
-        <Image src={image} width={100} height={100} />
+        <Image alt="Logo" src={image} width={100} height={100} />
       </div>
     </a>
   );

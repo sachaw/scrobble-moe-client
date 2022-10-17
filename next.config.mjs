@@ -14,6 +14,8 @@ const nextConfig = {
   experimental: {
     concurrentFeatures: true,
     serverComponents: true,
+    reactRoot: true,
+    runtime: "nodejs"
   },
 };
 

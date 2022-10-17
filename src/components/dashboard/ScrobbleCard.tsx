@@ -19,6 +19,7 @@ export const ScrobbleCard = ({ scrobble }: UserCardProps): JSX.Element => {
             </small>
             {scrobble.accounts.map((account, index) => (
               <Image
+		alt="Provider"
                 className="my-auto"
                 width="22"
                 height="22"

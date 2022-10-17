@@ -81,6 +81,7 @@ export const AnilistSearch = React.forwardRef<
           {selectedAnime && (
             <div className="flex p-2">
               <Image
+		alt="Cover Image"
                 className="rounded-md"
                 src={selectedAnime.coverImage.extraLarge}
                 height={120}

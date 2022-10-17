@@ -21,6 +21,7 @@ export const UserCard = ({
     <div className="flex p-2 space-x-4 bg-gray-100 select-none md:rounded-lg">
       <div className="my-auto">
         <Image
+	  alt="User Avatar"
           width="64"
           height="64"
           className="rounded-full bg-secondaryBg"
@@ -40,6 +41,7 @@ export const UserCard = ({
               }
               leftIcon={
                 <Image
+		  alt="Provider"
                   className="my-auto"
                   width="16"
                   height="16"
@@ -57,6 +59,7 @@ export const UserCard = ({
               rightIcon={<FiXCircle />}
               leftIcon={
                 <Image
+		  alt="Provider"
                   className="my-auto"
                   width="16"
                   height="16"

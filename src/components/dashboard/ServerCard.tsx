@@ -26,7 +26,7 @@ export const ServerCard = ({ server }: ServerCardProps): JSX.Element => {
           <Disclosure.Button className="w-full">
             <div className="flex justify-between w-full space-x-4">
               <div className="flex space-x-2">
-                <Image src="/plex.svg" width="45" height="45" />
+                <Image alt="Plex" src="/plex.svg" width="45" height="45" />
                 <div className="flex flex-col">
                   <div className="mr-auto text-lg">{server.name}</div>
                   <div className="w-32 mr-auto text-sm font-light text-gray-600 truncate">

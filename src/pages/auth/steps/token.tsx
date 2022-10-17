@@ -43,6 +43,7 @@ const Token = ({ plexToken, setError }: webAuthnProps): JSX.Element => {
           <div className="flex">
             <div className="w-16 h-16">
               <Image
+		alt="Plex Avatar"
                 src={webAuthnOptions.data?.authenticate.plexUser.avatar ?? ""}
                 width={64}
                 height={64}
