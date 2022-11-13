@@ -12,9 +12,6 @@ const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
   experimental: {
-    concurrentFeatures: true,
-    serverComponents: true,
-    reactRoot: true,
     runtime: "nodejs"
   },
 };
