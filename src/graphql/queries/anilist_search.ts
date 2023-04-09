@@ -1,41 +1,36 @@
-import { gql } from 'urql';
+import { gql } from "urql";
 
 export enum IStatusEnum {
-  FINISHED = "FINISHED",
-  RELEASING = "RELEASING",
-  NOT_YET_RELEASED = "NOT_YET_RELEASED",
-  CANCELLED = "CANCELLED",
-  HIATUS = "HIATUS",
+	FINISHED = "FINISHED",
+	RELEASING = "RELEASING",
+	NOT_YET_RELEASED = "NOT_YET_RELEASED",
+	CANCELLED = "CANCELLED",
+	HIATUS = "HIATUS",
 }
 
 export interface IAniListAnime {
-  id: number;
-  title: {
-    romaji: string;
-  };
-  startDate: {
-    year: number;
-  };
-  coverImage: {
-    extraLarge: string;
-  };
-  description: string;
-  episodes: number;
-  status: IStatusEnum;
+	id: number;
+	title: {
+		romaji: string;
+	};
+	startDate: {
+		year: number;
+	};
+	coverImage: {
+		extraLarge: string;
+	};
+	description: string;
+	episodes: number;
+	status: IStatusEnum;
 }
 
 export interface IIAniListSearchResponse {
-  anime: {
-    pageInfo: {
-      total: number;
-    };
-    results: IAniListAnime[];
-  };
-}
-
-export interface IAniListSearchVariabled {
-  id?: number;
-  search?: string;
+	anime: {
+		pageInfo: {
+			total: number;
+		};
+		results: IAniListAnime[];
+	};
 }
 
 export const ANILIST_SEARCH = gql`
